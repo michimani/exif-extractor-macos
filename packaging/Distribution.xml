@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<installer-gui-script minSpecVersion="2">
+    <title>EXIF Extractor</title>
+    <options customize="never" require-scripts="false" rootVolumeOnly="true"/>
+    <domains enable_localSystem="true"/>
+    <choices-outline>
+        <line choice="default">
+            <line choice="com.michimani.ExifExtractor"/>
+        </line>
+    </choices-outline>
+    <choice id="default"/>
+    <choice id="com.michimani.ExifExtractor" visible="false">
+        <pkg-ref id="com.michimani.ExifExtractor"/>
+    </choice>
+    <pkg-ref id="com.michimani.ExifExtractor" version="0" onConclusion="none">ExifExtractor.pkg</pkg-ref>
+</installer-gui-script>

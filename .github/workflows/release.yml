@@ -1,0 +1,139 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: macos-15
+
+    env:
+      KEYCHAIN_PATH: ${{ runner.temp }}/signing.keychain-db
+      ARCHIVE_PATH: ${{ runner.temp }}/ExifExtractor.xcarchive
+      EXPORT_PATH: ${{ runner.temp }}/export
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Get version from tag
+        run: echo "VERSION=${GITHUB_REF_NAME#v}" >> $GITHUB_ENV
+
+      - name: Import certificates into temporary keychain
+        env:
+          APP_CERT_BASE64: ${{ secrets.APPLE_CERTIFICATE }}
+          APP_CERT_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
+          INSTALLER_CERT_BASE64: ${{ secrets.APPLE_INSTALLER_CERTIFICATE }}
+          INSTALLER_CERT_PASSWORD: ${{ secrets.APPLE_INSTALLER_CERTIFICATE_PASSWORD }}
+        run: |
+          KEYCHAIN_PASSWORD=$(uuidgen)
+          echo "KEYCHAIN_PASSWORD=$KEYCHAIN_PASSWORD" >> $GITHUB_ENV
+
+          security create-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+          security set-keychain-settings -lut 21600 "$KEYCHAIN_PATH"
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+          security list-keychain -d user -s "$KEYCHAIN_PATH"
+
+          echo -n "$APP_CERT_BASE64" | base64 --decode -o "$RUNNER_TEMP/app_cert.p12"
+          security import "$RUNNER_TEMP/app_cert.p12" \
+            -P "$APP_CERT_PASSWORD" -A -t cert -f pkcs12 -k "$KEYCHAIN_PATH"
+
+          echo -n "$INSTALLER_CERT_BASE64" | base64 --decode -o "$RUNNER_TEMP/installer_cert.p12"
+          security import "$RUNNER_TEMP/installer_cert.p12" \
+            -P "$INSTALLER_CERT_PASSWORD" -A -t cert -f pkcs12 -k "$KEYCHAIN_PATH"
+
+          security set-key-partition-list -S apple-tool:,apple: \
+            -s -k "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+
+      - name: Build archive
+        run: |
+          xcodebuild archive \
+            -project ExifExtractor.xcodeproj \
+            -scheme ExifExtractor \
+            -configuration Release \
+            -archivePath "$ARCHIVE_PATH" \
+            CODE_SIGN_STYLE=Manual \
+            CODE_SIGN_IDENTITY="Developer ID Application" \
+            DEVELOPMENT_TEAM="${{ secrets.APPLE_TEAM_ID }}" \
+            OTHER_CODE_SIGN_FLAGS="--keychain $KEYCHAIN_PATH"
+
+      - name: Export .app
+        run: |
+          cat > "$RUNNER_TEMP/ExportOptions.plist" << 'PLIST'
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0">
+          <dict>
+              <key>method</key>
+              <string>developer-id</string>
+              <key>signingStyle</key>
+              <string>manual</string>
+              <key>signingCertificate</key>
+              <string>Developer ID Application</string>
+          </dict>
+          </plist>
+          PLIST
+
+          sed -i '' "s|<string>developer-id</string>|<string>developer-id</string>|" "$RUNNER_TEMP/ExportOptions.plist"
+
+          xcodebuild -exportArchive \
+            -archivePath "$ARCHIVE_PATH" \
+            -exportPath "$EXPORT_PATH" \
+            -exportOptionsPlist "$RUNNER_TEMP/ExportOptions.plist"
+
+      - name: Notarize .app
+        run: |
+          ditto -c -k --keepParent \
+            "$EXPORT_PATH/ExifExtractor.app" \
+            "$RUNNER_TEMP/ExifExtractor-app.zip"
+
+          xcrun notarytool submit "$RUNNER_TEMP/ExifExtractor-app.zip" \
+            --apple-id "${{ secrets.APPLE_ID }}" \
+            --password "${{ secrets.APPLE_APP_PASSWORD }}" \
+            --team-id "${{ secrets.APPLE_TEAM_ID }}" \
+            --wait --verbose
+
+          xcrun stapler staple "$EXPORT_PATH/ExifExtractor.app"
+
+      - name: Create .pkg
+        run: |
+          pkgbuild \
+            --component "$EXPORT_PATH/ExifExtractor.app" \
+            --install-location /Applications \
+            --identifier com.michimani.ExifExtractor \
+            --version "$VERSION" \
+            "$RUNNER_TEMP/ExifExtractor.pkg"
+
+          INSTALLER_IDENTITY=$(security find-identity -v "$KEYCHAIN_PATH" \
+            | grep "Developer ID Installer" | sed 's/.*"\(.*\)".*/\1/' | head -1)
+
+          productbuild \
+            --distribution packaging/Distribution.xml \
+            --package-path "$RUNNER_TEMP" \
+            --sign "$INSTALLER_IDENTITY" \
+            "$RUNNER_TEMP/ExifExtractor-$VERSION.pkg"
+
+      - name: Notarize .pkg
+        run: |
+          xcrun notarytool submit "$RUNNER_TEMP/ExifExtractor-$VERSION.pkg" \
+            --apple-id "${{ secrets.APPLE_ID }}" \
+            --password "${{ secrets.APPLE_APP_PASSWORD }}" \
+            --team-id "${{ secrets.APPLE_TEAM_ID }}" \
+            --wait --verbose
+
+          xcrun stapler staple "$RUNNER_TEMP/ExifExtractor-$VERSION.pkg"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: "EXIF Extractor v${{ env.VERSION }}"
+          files: ${{ runner.temp }}/ExifExtractor-${{ env.VERSION }}.pkg
+          generate_release_notes: true
+
+      - name: Clean up keychain
+        if: always()
+        run: security delete-keychain "$KEYCHAIN_PATH"
