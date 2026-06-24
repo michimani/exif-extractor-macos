@@ -20,6 +20,11 @@
 		AA00000000000000000041CC /* ExifReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000021CC /* ExifReader.swift */; };
 		AA00000000000000000042CC /* FolderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000022CC /* FolderManager.swift */; };
 		AA00000000000000000043CC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000023CC /* Assets.xcassets */; };
+		AA00000000000000000091CC /* CopyTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000081CC /* CopyTemplate.swift */; };
+		AA00000000000000000092CC /* TemplateRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000082CC /* TemplateRenderer.swift */; };
+		AA00000000000000000093CC /* TemplateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000083CC /* TemplateViewModel.swift */; };
+		AA00000000000000000094CC /* TemplateCopySection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000084CC /* TemplateCopySection.swift */; };
+		AA00000000000000000095CC /* TemplateManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000085CC /* TemplateManagerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +43,11 @@
 		AA00000000000000000023CC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AA00000000000000000024CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA00000000000000000025CC /* ExifExtractor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExifExtractor.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA00000000000000000081CC /* CopyTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyTemplate.swift; sourceTree = "<group>"; };
+		AA00000000000000000082CC /* TemplateRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateRenderer.swift; sourceTree = "<group>"; };
+		AA00000000000000000083CC /* TemplateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateViewModel.swift; sourceTree = "<group>"; };
+		AA00000000000000000084CC /* TemplateCopySection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateCopySection.swift; sourceTree = "<group>"; };
+		AA00000000000000000085CC /* TemplateManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateManagerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +98,7 @@
 				AA00000000000000000013CC /* ExifData.swift */,
 				AA00000000000000000014CC /* PhotoItem.swift */,
 				AA00000000000000000015CC /* FolderItem.swift */,
+				AA00000000000000000081CC /* CopyTemplate.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -96,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				AA00000000000000000016CC /* AppViewModel.swift */,
+				AA00000000000000000083CC /* TemplateViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -107,6 +119,8 @@
 				AA00000000000000000018CC /* PhotoViewerView.swift */,
 				AA00000000000000000019CC /* ExifInfoView.swift */,
 				AA00000000000000000020CC /* ThumbnailStripView.swift */,
+				AA00000000000000000084CC /* TemplateCopySection.swift */,
+				AA00000000000000000085CC /* TemplateManagerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -116,6 +130,7 @@
 			children = (
 				AA00000000000000000021CC /* ExifReader.swift */,
 				AA00000000000000000022CC /* FolderManager.swift */,
+				AA00000000000000000082CC /* TemplateRenderer.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -202,6 +217,11 @@
 				AA00000000000000000040CC /* ThumbnailStripView.swift in Sources */,
 				AA00000000000000000041CC /* ExifReader.swift in Sources */,
 				AA00000000000000000042CC /* FolderManager.swift in Sources */,
+				AA00000000000000000091CC /* CopyTemplate.swift in Sources */,
+				AA00000000000000000092CC /* TemplateRenderer.swift in Sources */,
+				AA00000000000000000093CC /* TemplateViewModel.swift in Sources */,
+				AA00000000000000000094CC /* TemplateCopySection.swift in Sources */,
+				AA00000000000000000095CC /* TemplateManagerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

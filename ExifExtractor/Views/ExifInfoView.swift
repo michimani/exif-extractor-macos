@@ -2,11 +2,15 @@ import SwiftUI
 
 struct ExifInfoView: View {
     @EnvironmentObject var viewModel: AppViewModel
+    @EnvironmentObject var templateVM: TemplateViewModel
 
     var body: some View {
         ScrollView {
             if let photo = viewModel.selectedPhoto {
                 VStack(alignment: .leading, spacing: 12) {
+                    TemplateCopySection(photo: photo)
+                        .environmentObject(templateVM)
+
                     fileInfoSection(photo: photo)
 
                     if let exif = photo.exifData {
