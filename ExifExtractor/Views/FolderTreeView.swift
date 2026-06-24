@@ -2,6 +2,7 @@ import SwiftUI
 
 struct FolderTreeView: View {
     @EnvironmentObject var viewModel: AppViewModel
+    @State private var showStats = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -11,6 +12,16 @@ struct FolderTreeView: View {
                     .fontWeight(.semibold)
                     .foregroundStyle(.secondary)
                 Spacer()
+                Button {
+                    showStats = true
+                } label: {
+                    Image(systemName: "chart.bar")
+                        .font(.system(size: 12, weight: .medium))
+                }
+                .buttonStyle(.plain)
+                .disabled(viewModel.currentPhotos.isEmpty)
+                .help("撮影統計を表示")
+
                 Button {
                     viewModel.addFolder()
                 } label: {
@@ -22,6 +33,11 @@ struct FolderTreeView: View {
             }
             .padding(.horizontal, 12)
             .padding(.vertical, 10)
+            .sheet(isPresented: $showStats) {
+                if let name = viewModel.selectedFolderName {
+                    StatsView(folderName: name, photos: viewModel.currentPhotos)
+                }
+            }
 
             Divider()
 

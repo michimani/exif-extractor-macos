@@ -82,6 +82,11 @@ final class AppViewModel: ObservableObject {
         return folder
     }
 
+    var selectedFolderName: String? {
+        guard let id = selectedFolderID else { return nil }
+        return findFolder(id: id, in: folders)?.name
+    }
+
     private func findFolder(id: UUID, in folders: [FolderItem]) -> FolderItem? {
         for folder in folders {
             if folder.id == id { return folder }

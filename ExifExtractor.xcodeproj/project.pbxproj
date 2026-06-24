@@ -25,6 +25,9 @@
 		AA00000000000000000093CC /* TemplateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000083CC /* TemplateViewModel.swift */; };
 		AA00000000000000000094CC /* TemplateCopySection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000084CC /* TemplateCopySection.swift */; };
 		AA00000000000000000095CC /* TemplateManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000085CC /* TemplateManagerView.swift */; };
+		AA000000000000000000B1CC /* PhotoStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000A1CC /* PhotoStats.swift */; };
+		AA000000000000000000B2CC /* StatsCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000A2CC /* StatsCalculator.swift */; };
+		AA000000000000000000B3CC /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000A3CC /* StatsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +51,9 @@
 		AA00000000000000000083CC /* TemplateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateViewModel.swift; sourceTree = "<group>"; };
 		AA00000000000000000084CC /* TemplateCopySection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateCopySection.swift; sourceTree = "<group>"; };
 		AA00000000000000000085CC /* TemplateManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateManagerView.swift; sourceTree = "<group>"; };
+		AA000000000000000000A1CC /* PhotoStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoStats.swift; sourceTree = "<group>"; };
+		AA000000000000000000A2CC /* StatsCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsCalculator.swift; sourceTree = "<group>"; };
+		AA000000000000000000A3CC /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +105,7 @@
 				AA00000000000000000014CC /* PhotoItem.swift */,
 				AA00000000000000000015CC /* FolderItem.swift */,
 				AA00000000000000000081CC /* CopyTemplate.swift */,
+				AA000000000000000000A1CC /* PhotoStats.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -121,6 +128,7 @@
 				AA00000000000000000020CC /* ThumbnailStripView.swift */,
 				AA00000000000000000084CC /* TemplateCopySection.swift */,
 				AA00000000000000000085CC /* TemplateManagerView.swift */,
+				AA000000000000000000A3CC /* StatsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -131,6 +139,7 @@
 				AA00000000000000000021CC /* ExifReader.swift */,
 				AA00000000000000000022CC /* FolderManager.swift */,
 				AA00000000000000000082CC /* TemplateRenderer.swift */,
+				AA000000000000000000A2CC /* StatsCalculator.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -222,6 +231,9 @@
 				AA00000000000000000093CC /* TemplateViewModel.swift in Sources */,
 				AA00000000000000000094CC /* TemplateCopySection.swift in Sources */,
 				AA00000000000000000095CC /* TemplateManagerView.swift in Sources */,
+				AA000000000000000000B1CC /* PhotoStats.swift in Sources */,
+				AA000000000000000000B2CC /* StatsCalculator.swift in Sources */,
+				AA000000000000000000B3CC /* StatsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
