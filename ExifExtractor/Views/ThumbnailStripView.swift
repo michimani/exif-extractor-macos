@@ -9,7 +9,7 @@ struct ThumbnailStripView: View {
             if viewModel.currentPhotos.isEmpty {
                 HStack {
                     Spacer()
-                    Text("このフォルダには写真がありません")
+                    Text("thumbnail.empty.message")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                     Spacer()

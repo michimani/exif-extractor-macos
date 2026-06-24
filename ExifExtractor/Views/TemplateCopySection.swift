@@ -7,10 +7,10 @@ struct TemplateCopySection: View {
     @State private var copiedID: UUID?
 
     var body: some View {
-        ExifSection(title: "テンプレートでコピー") {
+        ExifSection(title: "template.copy.title") {
             if templateVM.templates.isEmpty {
                 HStack {
-                    Text("テンプレートがありません")
+                    Text("template.copy.empty")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                     Spacer()
@@ -35,7 +35,7 @@ struct TemplateCopySection: View {
             } label: {
                 HStack {
                     Image(systemName: "slider.horizontal.3")
-                    Text("テンプレートを管理...")
+                    Text("template.manage.button")
                 }
                 .font(.caption)
                 .foregroundStyle(Color.accentColor)
@@ -91,7 +91,7 @@ private struct TemplateCopyRow: View {
                     .frame(width: 16)
             }
             .buttonStyle(.plain)
-            .help("\(template.name) をコピー")
+            .help(Text(String(format: String(localized: "template.copy.tooltip"), template.name)))
         }
         .padding(.horizontal, 10)
         .padding(.vertical, 7)

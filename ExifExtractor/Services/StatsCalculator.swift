@@ -38,13 +38,13 @@ enum StatsCalculator {
 
     private static func focalLengthGroups(_ values: [Double]) -> [StatEntry] {
         let buckets: [(String, Double, Double)] = [
-            ("〜16mm",    0,    17),
+            (String(localized: "stats.focal.under16"), 0,    17),
             ("17-24mm",  17,   25),
             ("25-35mm",  25,   36),
             ("36-50mm",  36,   51),
             ("51-85mm",  51,   86),
             ("86-135mm", 86,   136),
-            ("136mm〜",  136,  .infinity),
+            (String(localized: "stats.focal.over136"), 136,  .infinity),
         ]
         return buckets.compactMap { label, minV, maxV in
             let n = values.filter { $0 >= minV && $0 < maxV }.count
@@ -54,14 +54,14 @@ enum StatsCalculator {
 
     private static func apertureGroups(_ values: [Double]) -> [StatEntry] {
         let buckets: [(String, Double, Double)] = [
-            ("f/1.4以下", 0,    1.51),
+            (String(localized: "stats.aperture.f14under"), 0,    1.51),
             ("f/1.8-2.0", 1.51, 2.11),
             ("f/2.8",     2.11, 3.21),
             ("f/4",       3.21, 4.51),
             ("f/5.6",     4.51, 6.41),
             ("f/8",       6.41, 9.01),
             ("f/11",      9.01, 12.01),
-            ("f/16以上",  12.01, .infinity),
+            (String(localized: "stats.aperture.f16over"), 12.01, .infinity),
         ]
         return buckets.compactMap { label, minV, maxV in
             let n = values.filter { $0 >= minV && $0 < maxV }.count
@@ -86,12 +86,12 @@ enum StatsCalculator {
 
     private static func shutterGroups(_ values: [Double]) -> [StatEntry] {
         let buckets: [(String, Double, Double)] = [
-            ("1s以上",         1.0,      .infinity),
+            (String(localized: "stats.shutter.1sover"),    1.0,      .infinity),
             ("1/4〜1/2s",      0.25,     1.0),
             ("1/30〜1/8s",     1/30.0,   0.25),
             ("1/125〜1/60s",   1/125.0,  1/30.0),
             ("1/500〜1/250s",  1/500.0,  1/125.0),
-            ("1/1000s以下",    0.0,      1/500.0),
+            (String(localized: "stats.shutter.1000under"), 0.0,      1/500.0),
         ]
         return buckets.compactMap { label, minV, maxV in
             let n = values.filter { $0 >= minV && $0 < maxV }.count

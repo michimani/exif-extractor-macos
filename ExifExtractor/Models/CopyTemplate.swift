@@ -12,10 +12,14 @@ struct CopyTemplate: Identifiable, Codable, Equatable {
     }
 
     static let defaults: [CopyTemplate] = [
-        CopyTemplate(name: "基本情報", format: "{cameraName} {focalLength} {f} ISO{iso} {shutterSpeed}"),
-        CopyTemplate(name: "カメラ＋レンズ", format: "{cameraName} / {lens}"),
-        CopyTemplate(name: "撮影設定", format: "f/{f} ISO{iso} {shutterSpeed}"),
-        CopyTemplate(name: "ファイル情報", format: "{filename} ({resolution})"),
+        CopyTemplate(name: String(localized: "template.default.basic"),
+                     format: "{cameraName} {focalLength} {f} ISO{iso} {shutterSpeed}"),
+        CopyTemplate(name: String(localized: "template.default.cameraLens"),
+                     format: "{cameraName} / {lens}"),
+        CopyTemplate(name: String(localized: "template.default.shooting"),
+                     format: "f/{f} ISO{iso} {shutterSpeed}"),
+        CopyTemplate(name: String(localized: "template.default.file"),
+                     format: "{filename} ({resolution})"),
     ]
 }
 
@@ -39,20 +43,20 @@ enum TemplatePlaceholder: String, CaseIterable {
 
     var label: String {
         switch self {
-        case .make: return "メーカー"
-        case .model: return "カメラモデル"
-        case .cameraName: return "メーカー＋モデル"
-        case .lens: return "レンズ"
-        case .focalLength: return "焦点距離"
-        case .f: return "絞り値（数値のみ）"
-        case .iso: return "ISO感度"
-        case .shutterSpeed: return "シャッター速度"
-        case .ev: return "露出補正"
-        case .date: return "撮影日時"
-        case .width: return "幅（px）"
-        case .height: return "高さ（px）"
-        case .resolution: return "解像度"
-        case .filename: return "ファイル名"
+        case .make:         return String(localized: "placeholder.label.make")
+        case .model:        return String(localized: "placeholder.label.model")
+        case .cameraName:   return String(localized: "placeholder.label.cameraName")
+        case .lens:         return String(localized: "placeholder.label.lens")
+        case .focalLength:  return String(localized: "placeholder.label.focalLength")
+        case .f:            return String(localized: "placeholder.label.f")
+        case .iso:          return String(localized: "placeholder.label.iso")
+        case .shutterSpeed: return String(localized: "placeholder.label.shutterSpeed")
+        case .ev:           return String(localized: "placeholder.label.ev")
+        case .date:         return String(localized: "placeholder.label.date")
+        case .width:        return String(localized: "placeholder.label.width")
+        case .height:       return String(localized: "placeholder.label.height")
+        case .resolution:   return String(localized: "placeholder.label.resolution")
+        case .filename:     return String(localized: "placeholder.label.filename")
         }
     }
 

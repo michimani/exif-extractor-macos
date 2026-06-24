@@ -97,7 +97,7 @@ struct PhotoViewerView: View {
                 Image(systemName: "arrow.up.left.and.down.right.magnifyingglass")
             }
             .buttonStyle(.plain)
-            .help("フィットサイズにリセット")
+            .help("viewer.zoom.reset.tooltip")
         }
         .padding(.horizontal, 12)
         .padding(.vertical, 7)
@@ -109,7 +109,7 @@ struct PhotoViewerView: View {
             Image(systemName: "photo.on.rectangle.angled")
                 .font(.system(size: 52))
                 .foregroundStyle(.tertiary)
-            Text("写真を選択してください")
+            Text("viewer.empty.message")
                 .font(.callout)
                 .foregroundStyle(.secondary)
         }

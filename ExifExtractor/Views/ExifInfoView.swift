@@ -34,60 +34,60 @@ struct ExifInfoView: View {
     }
 
     private func fileInfoSection(photo: PhotoItem) -> some View {
-        ExifSection(title: "ファイル情報") {
-            ExifRow(label: "ファイル名", value: photo.fileName)
+        ExifSection(title: "exif.section.file") {
+            ExifRow(label: "exif.field.filename", value: photo.fileName)
             if let size = photo.fileSizeString {
-                ExifRow(label: "ファイルサイズ", value: size)
+                ExifRow(label: "exif.field.filesize", value: size)
             }
             if !photo.fileExtension.isEmpty {
-                ExifRow(label: "形式", value: photo.fileExtension)
+                ExifRow(label: "exif.field.format", value: photo.fileExtension)
             }
         }
     }
 
     private func cameraSection(exif: ExifData) -> some View {
-        ExifSection(title: "カメラ情報") {
-            if let make = exif.make { ExifRow(label: "メーカー", value: make) }
-            if let model = exif.model { ExifRow(label: "モデル", value: model) }
-            if let lens = exif.lensModel { ExifRow(label: "レンズ", value: lens) }
-            if let sw = exif.software { ExifRow(label: "ソフトウェア", value: sw) }
+        ExifSection(title: "exif.section.camera") {
+            if let make = exif.make { ExifRow(label: "exif.field.make", value: make) }
+            if let model = exif.model { ExifRow(label: "exif.field.model", value: model) }
+            if let lens = exif.lensModel { ExifRow(label: "exif.field.lens", value: lens) }
+            if let sw = exif.software { ExifRow(label: "exif.field.software", value: sw) }
         }
     }
 
     private func shootingSection(exif: ExifData) -> some View {
-        ExifSection(title: "撮影情報") {
+        ExifSection(title: "exif.section.shooting") {
             if let date = exif.dateTimeOriginal {
-                ExifRow(label: "撮影日時", value: formatDate(date))
+                ExifRow(label: "exif.field.dateTaken", value: formatDate(date))
             }
-            if let fl = exif.focalLengthString { ExifRow(label: "焦点距離", value: fl) }
-            if let f = exif.fNumberString { ExifRow(label: "絞り値", value: f) }
-            if let iso = exif.iso { ExifRow(label: "ISO感度", value: "ISO \(iso)") }
-            if let ss = exif.shutterSpeedString { ExifRow(label: "シャッター速度", value: ss) }
+            if let fl = exif.focalLengthString { ExifRow(label: "exif.field.focalLength", value: fl) }
+            if let f = exif.fNumberString { ExifRow(label: "exif.field.aperture", value: f) }
+            if let iso = exif.iso { ExifRow(label: "exif.field.iso", value: "ISO \(iso)") }
+            if let ss = exif.shutterSpeedString { ExifRow(label: "exif.field.shutterSpeed", value: ss) }
             if let ev = exif.exposureBias {
-                ExifRow(label: "露出補正", value: String(format: "%+.1f EV", ev))
+                ExifRow(label: "exif.field.exposureBias", value: String(format: "%+.1f EV", ev))
             }
-            if let wb = exif.whiteBalance { ExifRow(label: "ホワイトバランス", value: wb) }
-            if let flash = exif.flash { ExifRow(label: "フラッシュ", value: flash) }
+            if let wb = exif.whiteBalance { ExifRow(label: "exif.field.whiteBalance", value: wb) }
+            if let flash = exif.flash { ExifRow(label: "exif.field.flash", value: flash) }
         }
     }
 
     private func imageSection(exif: ExifData) -> some View {
-        ExifSection(title: "画像情報") {
-            if let res = exif.resolutionString { ExifRow(label: "解像度", value: res) }
-            if let cs = exif.colorSpace { ExifRow(label: "カラースペース", value: cs) }
+        ExifSection(title: "exif.section.image") {
+            if let res = exif.resolutionString { ExifRow(label: "exif.field.resolution", value: res) }
+            if let cs = exif.colorSpace { ExifRow(label: "exif.field.colorSpace", value: cs) }
         }
     }
 
     private func gpsSection(exif: ExifData) -> some View {
-        ExifSection(title: "位置情報") {
+        ExifSection(title: "exif.section.gps") {
             if let lat = exif.gpsLatitude {
-                ExifRow(label: "緯度", value: String(format: "%.6f", lat))
+                ExifRow(label: "exif.field.latitude", value: String(format: "%.6f", lat))
             }
             if let lon = exif.gpsLongitude {
-                ExifRow(label: "経度", value: String(format: "%.6f", lon))
+                ExifRow(label: "exif.field.longitude", value: String(format: "%.6f", lon))
             }
             if let alt = exif.gpsAltitude {
-                ExifRow(label: "高度", value: String(format: "%.1f m", alt))
+                ExifRow(label: "exif.field.altitude", value: String(format: "%.1f m", alt))
             }
         }
     }
@@ -97,7 +97,7 @@ struct ExifInfoView: View {
             Image(systemName: "info.circle")
                 .font(.system(size: 36))
                 .foregroundStyle(.tertiary)
-            Text("写真を選択すると\nEXIF情報が表示されます")
+            Text("exif.empty.message")
                 .font(.callout)
                 .multilineTextAlignment(.center)
                 .foregroundStyle(.secondary)
@@ -110,13 +110,13 @@ struct ExifInfoView: View {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
         formatter.timeStyle = .medium
-        formatter.locale = Locale(identifier: "ja_JP")
+        formatter.locale = .current
         return formatter.string(from: date)
     }
 }
 
 struct ExifSection<Content: View>: View {
-    let title: String
+    let title: LocalizedStringKey
     @ViewBuilder let content: () -> Content
 
     var body: some View {
@@ -141,7 +141,7 @@ struct ExifSection<Content: View>: View {
 }
 
 struct ExifRow: View {
-    let label: String
+    let label: LocalizedStringKey
     let value: String
     @State private var isCopied = false
 
@@ -166,7 +166,7 @@ struct ExifRow: View {
                     .frame(width: 16)
             }
             .buttonStyle(.plain)
-            .help("コピー")
+            .help("action.copy")
         }
         .padding(.horizontal, 10)
         .padding(.vertical, 7)

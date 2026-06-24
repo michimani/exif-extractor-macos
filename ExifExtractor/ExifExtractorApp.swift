@@ -14,7 +14,7 @@ struct ExifExtractorApp: App {
         .defaultSize(width: 1200, height: 750)
         .commands {
             CommandGroup(after: .newItem) {
-                Button("フォルダを追加...") {
+                Button("folder.add.menu") {
                     viewModel.addFolder()
                 }
                 .keyboardShortcut("o", modifiers: [.command, .shift])

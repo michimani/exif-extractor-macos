@@ -24,10 +24,10 @@ struct StatsView: View {
             .frame(minWidth: 720, minHeight: 520)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("完了") { dismiss() }
+                    Button("action.done") { dismiss() }
                 }
             }
-            .navigationTitle("\(folderName) の撮影統計")
+            .navigationTitle(Text(String(format: String(localized: "stats.title"), folderName)))
         }
         .task { await loadStats() }
     }
@@ -35,12 +35,13 @@ struct StatsView: View {
     private var loadingView: some View {
         VStack(spacing: 16) {
             ProgressView(value: progress) {
-                Text("EXIF データを読み込んでいます...")
+                Text("stats.loading.message")
                     .font(.callout)
             }
             .progressViewStyle(.linear)
             .frame(width: 320)
-            Text("\(Int(progress * 100))% (\(Int(progress * Double(photos.count))) / \(photos.count)枚)")
+            Text(String(format: String(localized: "stats.loading.progress"),
+                        Int(progress * Double(photos.count)), photos.count))
                 .font(.caption)
                 .foregroundStyle(.secondary)
         }
@@ -52,7 +53,7 @@ struct StatsView: View {
             Image(systemName: "chart.bar.xaxis")
                 .font(.system(size: 44))
                 .foregroundStyle(.tertiary)
-            Text("統計を表示できる EXIF データがありません")
+            Text("stats.empty.message")
                 .font(.callout)
                 .foregroundStyle(.secondary)
         }
@@ -69,19 +70,19 @@ struct StatsView: View {
                     spacing: 16
                 ) {
                     if !stats.focalLengthDistribution.isEmpty {
-                        chartCard(title: "焦点距離", systemImage: "scope",
+                        chartCard(title: "stats.chart.focalLength", systemImage: "scope",
                                   data: stats.focalLengthDistribution, color: .blue)
                     }
                     if !stats.apertureDistribution.isEmpty {
-                        chartCard(title: "絞り値", systemImage: "camera.aperture",
+                        chartCard(title: "stats.chart.aperture", systemImage: "camera.aperture",
                                   data: stats.apertureDistribution, color: .purple)
                     }
                     if !stats.isoDistribution.isEmpty {
-                        chartCard(title: "ISO感度", systemImage: "light.max",
+                        chartCard(title: "stats.chart.iso", systemImage: "light.max",
                                   data: stats.isoDistribution, color: .orange)
                     }
                     if !stats.shutterSpeedDistribution.isEmpty {
-                        chartCard(title: "シャッター速度", systemImage: "timer",
+                        chartCard(title: "stats.chart.shutterSpeed", systemImage: "timer",
                                   data: stats.shutterSpeedDistribution, color: .green)
                     }
                 }
@@ -89,11 +90,11 @@ struct StatsView: View {
                 if !stats.cameraRanking.isEmpty || !stats.lensRanking.isEmpty {
                     HStack(alignment: .top, spacing: 16) {
                         if !stats.cameraRanking.isEmpty {
-                            rankingCard(title: "カメラ", systemImage: "camera.fill",
+                            rankingCard(title: "stats.ranking.camera", systemImage: "camera.fill",
                                         entries: stats.cameraRanking, total: stats.withExifCount)
                         }
                         if !stats.lensRanking.isEmpty {
-                            rankingCard(title: "レンズ", systemImage: "circle.hexagongrid.fill",
+                            rankingCard(title: "stats.ranking.lens", systemImage: "circle.hexagongrid.fill",
                                         entries: stats.lensRanking, total: stats.withExifCount)
                         }
                     }
@@ -105,14 +106,14 @@ struct StatsView: View {
 
     private func summaryBanner(_ stats: PhotoStats) -> some View {
         HStack(spacing: 0) {
-            summaryPill(value: "\(stats.totalCount)枚", label: "合計")
+            summaryPill(value: "\(stats.totalCount)", label: "stats.summary.total")
             Divider().frame(height: 32).padding(.horizontal, 16)
-            summaryPill(value: "\(stats.withExifCount)枚", label: "EXIF あり")
+            summaryPill(value: "\(stats.withExifCount)", label: "stats.summary.withExif")
             if let range = stats.dateRange {
                 Divider().frame(height: 32).padding(.horizontal, 16)
-                summaryPill(value: dateString(range.first), label: "撮影開始")
+                summaryPill(value: dateString(range.first), label: "stats.summary.firstShot")
                 Divider().frame(height: 32).padding(.horizontal, 16)
-                summaryPill(value: dateString(range.last), label: "撮影終了")
+                summaryPill(value: dateString(range.last), label: "stats.summary.lastShot")
             }
             Spacer()
         }
@@ -122,14 +123,14 @@ struct StatsView: View {
         .clipShape(RoundedRectangle(cornerRadius: 10))
     }
 
-    private func summaryPill(value: String, label: String) -> some View {
+    private func summaryPill(value: String, label: LocalizedStringKey) -> some View {
         VStack(alignment: .leading, spacing: 2) {
             Text(value).font(.headline)
             Text(label).font(.caption).foregroundStyle(.secondary)
         }
     }
 
-    private func chartCard(title: String, systemImage: String, data: [StatEntry], color: Color) -> some View {
+    private func chartCard(title: LocalizedStringKey, systemImage: String, data: [StatEntry], color: Color) -> some View {
         VStack(alignment: .leading, spacing: 10) {
             Label(title, systemImage: systemImage)
                 .font(.callout)
@@ -138,8 +139,8 @@ struct StatsView: View {
             let maxCount = data.map(\.count).max() ?? 1
             Chart(data) { entry in
                 BarMark(
-                    x: .value("枚数", entry.count),
-                    y: .value("設定値", entry.label)
+                    x: .value(String(localized: "stats.chart.unit"), entry.count),
+                    y: .value("", entry.label)
                 )
                 .foregroundStyle(color.gradient)
                 .annotation(position: .trailing, alignment: .leading) {
@@ -157,7 +158,7 @@ struct StatsView: View {
         .clipShape(RoundedRectangle(cornerRadius: 10))
     }
 
-    private func rankingCard(title: String, systemImage: String, entries: [StatEntry], total: Int) -> some View {
+    private func rankingCard(title: LocalizedStringKey, systemImage: String, entries: [StatEntry], total: Int) -> some View {
         VStack(alignment: .leading, spacing: 10) {
             Label(title, systemImage: systemImage)
                 .font(.callout)
@@ -179,7 +180,7 @@ struct StatsView: View {
                         Spacer()
 
                         let pct = total > 0 ? Int(Double(entry.count) / Double(total) * 100) : 0
-                        Text("\(entry.count)枚 (\(pct)%)")
+                        Text(String(format: String(localized: "stats.ranking.count"), entry.count, pct))
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }
@@ -199,7 +200,8 @@ struct StatsView: View {
 
     private func dateString(_ date: Date) -> String {
         let fmt = DateFormatter()
-        fmt.dateFormat = "yyyy/MM/dd"
+        fmt.dateStyle = .short
+        fmt.timeStyle = .none
         return fmt.string(from: date)
     }
 

@@ -1,0 +1,598 @@
+{
+  "sourceLanguage" : "ja",
+  "strings" : {
+    "action.copy" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Copy" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "コピー" } }
+      }
+    },
+    "action.done" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Done" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "完了" } }
+      }
+    },
+
+    "folder.panel.title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Folders" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "フォルダ" } }
+      }
+    },
+    "folder.add.tooltip" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Add Folder" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "フォルダを追加" } }
+      }
+    },
+    "folder.add.menu" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Add Folder..." } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "フォルダを追加..." } }
+      }
+    },
+    "folder.stats.tooltip" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Show Shooting Statistics" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "撮影統計を表示" } }
+      }
+    },
+    "folder.empty.message" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Please add a folder" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "フォルダを追加してください" } }
+      }
+    },
+    "folder.select.button" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Select Folder" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "フォルダを選択" } }
+      }
+    },
+    "folder.remove.menu" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Remove Folder" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "フォルダを削除" } }
+      }
+    },
+    "folder.photo.count" : {
+      "comment" : "Number of photos in a folder. %d = count",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%d photos" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "%d枚" } }
+      }
+    },
+
+    "viewer.empty.message" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Select a photo" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "写真を選択してください" } }
+      }
+    },
+    "viewer.zoom.reset.tooltip" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Reset to Fit" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "フィットサイズにリセット" } }
+      }
+    },
+
+    "thumbnail.empty.message" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No photos in this folder" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "このフォルダには写真がありません" } }
+      }
+    },
+
+    "exif.section.file" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "File Info" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "ファイル情報" } }
+      }
+    },
+    "exif.section.camera" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Camera Info" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "カメラ情報" } }
+      }
+    },
+    "exif.section.shooting" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Shooting Info" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "撮影情報" } }
+      }
+    },
+    "exif.section.image" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Image Info" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "画像情報" } }
+      }
+    },
+    "exif.section.gps" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "GPS" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "位置情報" } }
+      }
+    },
+    "exif.empty.message" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Select a photo\nto view EXIF info" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "写真を選択すると\nEXIF情報が表示されます" } }
+      }
+    },
+
+    "exif.field.filename" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "File Name" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "ファイル名" } }
+      }
+    },
+    "exif.field.filesize" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "File Size" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "ファイルサイズ" } }
+      }
+    },
+    "exif.field.format" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Format" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "形式" } }
+      }
+    },
+    "exif.field.make" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Make" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "メーカー" } }
+      }
+    },
+    "exif.field.model" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Model" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "モデル" } }
+      }
+    },
+    "exif.field.lens" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Lens" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "レンズ" } }
+      }
+    },
+    "exif.field.software" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Software" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "ソフトウェア" } }
+      }
+    },
+    "exif.field.dateTaken" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Date Taken" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "撮影日時" } }
+      }
+    },
+    "exif.field.focalLength" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Focal Length" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "焦点距離" } }
+      }
+    },
+    "exif.field.aperture" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Aperture" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "絞り値" } }
+      }
+    },
+    "exif.field.iso" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "ISO" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "ISO感度" } }
+      }
+    },
+    "exif.field.shutterSpeed" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Shutter Speed" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "シャッター速度" } }
+      }
+    },
+    "exif.field.exposureBias" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Exposure Bias" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "露出補正" } }
+      }
+    },
+    "exif.field.whiteBalance" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "White Balance" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "ホワイトバランス" } }
+      }
+    },
+    "exif.field.flash" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Flash" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "フラッシュ" } }
+      }
+    },
+    "exif.field.resolution" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Resolution" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "解像度" } }
+      }
+    },
+    "exif.field.colorSpace" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Color Space" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "カラースペース" } }
+      }
+    },
+    "exif.field.latitude" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Latitude" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "緯度" } }
+      }
+    },
+    "exif.field.longitude" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Longitude" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "経度" } }
+      }
+    },
+    "exif.field.altitude" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Altitude" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "高度" } }
+      }
+    },
+
+    "template.copy.title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Copy with Template" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "テンプレートでコピー" } }
+      }
+    },
+    "template.copy.empty" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No templates" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "テンプレートがありません" } }
+      }
+    },
+    "template.manage.button" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Manage Templates..." } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "テンプレートを管理..." } }
+      }
+    },
+    "template.copy.tooltip" : {
+      "comment" : "Tooltip for copy button. %@ = template name",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Copy %@" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "%@をコピー" } }
+      }
+    },
+
+    "template.manager.title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Manage Templates" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "テンプレートを管理" } }
+      }
+    },
+    "template.add.tooltip" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Add Template" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "テンプレートを追加" } }
+      }
+    },
+    "template.delete.tooltip" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Delete Template" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "テンプレートを削除" } }
+      }
+    },
+    "template.field.name.label" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Template Name" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "テンプレート名" } }
+      }
+    },
+    "template.field.name.placeholder" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Name" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "名前" } }
+      }
+    },
+    "template.field.format.label" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Format" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "フォーマット" } }
+      }
+    },
+    "template.field.format.hint" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Wrap placeholders in {}. e.g. {cameraName} f/{f} ISO{iso}" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "プレースホルダーを {} で囲んで使います。例: {cameraName} f/{f} ISO{iso}" } }
+      }
+    },
+    "template.field.preview.label" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Preview" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "プレビュー" } }
+      }
+    },
+    "template.preview.empty" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "(empty)" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "（空）" } }
+      }
+    },
+    "template.preview.hint" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Select a photo to preview with EXIF data" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "写真を選択するとEXIFデータを使ったプレビューが表示されます" } }
+      }
+    },
+    "template.placeholders.title" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Available Placeholders" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "利用可能なプレースホルダー" } }
+      }
+    },
+    "template.placeholder.insert.tooltip" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Add to format" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "フォーマットに追加" } }
+      }
+    },
+    "template.empty.editor" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Select a template or\ncreate a new one with +" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "テンプレートを選択するか、\n+ ボタンで新規作成してください" } }
+      }
+    },
+
+    "template.default.basic" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Basic Info" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "基本情報" } }
+      }
+    },
+    "template.default.cameraLens" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Camera + Lens" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "カメラ＋レンズ" } }
+      }
+    },
+    "template.default.shooting" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Shooting Settings" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "撮影設定" } }
+      }
+    },
+    "template.default.file" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "File Info" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "ファイル情報" } }
+      }
+    },
+
+    "placeholder.label.make" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Make" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "メーカー" } }
+      }
+    },
+    "placeholder.label.model" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Camera Model" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "カメラモデル" } }
+      }
+    },
+    "placeholder.label.cameraName" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Make + Model" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "メーカー＋モデル" } }
+      }
+    },
+    "placeholder.label.lens" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Lens" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "レンズ" } }
+      }
+    },
+    "placeholder.label.focalLength" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Focal Length" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "焦点距離" } }
+      }
+    },
+    "placeholder.label.f" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Aperture (number only)" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "絞り値（数値のみ）" } }
+      }
+    },
+    "placeholder.label.iso" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "ISO" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "ISO感度" } }
+      }
+    },
+    "placeholder.label.shutterSpeed" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Shutter Speed" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "シャッター速度" } }
+      }
+    },
+    "placeholder.label.ev" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Exposure Bias" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "露出補正" } }
+      }
+    },
+    "placeholder.label.date" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Date Taken" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "撮影日時" } }
+      }
+    },
+    "placeholder.label.width" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Width (px)" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "幅（px）" } }
+      }
+    },
+    "placeholder.label.height" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Height (px)" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "高さ（px）" } }
+      }
+    },
+    "placeholder.label.resolution" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Resolution" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "解像度" } }
+      }
+    },
+    "placeholder.label.filename" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Filename" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "ファイル名" } }
+      }
+    },
+
+    "stats.title" : {
+      "comment" : "Window/sheet title for statistics. %@ = folder name",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Shooting Statistics: %@" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "%@の撮影統計" } }
+      }
+    },
+    "stats.loading.message" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Loading EXIF data..." } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "EXIF データを読み込んでいます..." } }
+      }
+    },
+    "stats.loading.progress" : {
+      "comment" : "Progress indicator. %d %d = loaded count, total count",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%d / %d photos" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "%d / %d枚" } }
+      }
+    },
+    "stats.empty.message" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "No EXIF data available for statistics" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "統計を表示できる EXIF データがありません" } }
+      }
+    },
+    "stats.summary.total" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Total" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "合計" } }
+      }
+    },
+    "stats.summary.withExif" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "With EXIF" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "EXIF あり" } }
+      }
+    },
+    "stats.summary.firstShot" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "First Shot" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "撮影開始" } }
+      }
+    },
+    "stats.summary.lastShot" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Last Shot" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "撮影終了" } }
+      }
+    },
+    "stats.chart.focalLength" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Focal Length" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "焦点距離" } }
+      }
+    },
+    "stats.chart.aperture" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Aperture" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "絞り値" } }
+      }
+    },
+    "stats.chart.iso" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "ISO" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "ISO感度" } }
+      }
+    },
+    "stats.chart.shutterSpeed" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Shutter Speed" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "シャッター速度" } }
+      }
+    },
+    "stats.chart.unit" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Photos" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "枚数" } }
+      }
+    },
+    "stats.ranking.camera" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Camera" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "カメラ" } }
+      }
+    },
+    "stats.ranking.lens" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Lens" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "レンズ" } }
+      }
+    },
+    "stats.ranking.count" : {
+      "comment" : "Ranking entry count. %d %d = count, percentage",
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%d photos (%d%%)" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "%d枚 (%d%%)" } }
+      }
+    },
+
+    "stats.focal.under16" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "≤16mm" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "〜16mm" } }
+      }
+    },
+    "stats.focal.over136" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "136mm+" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "136mm〜" } }
+      }
+    },
+    "stats.aperture.f14under" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "f/1.4 or less" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "f/1.4以下" } }
+      }
+    },
+    "stats.aperture.f16over" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "f/16 or more" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "f/16以上" } }
+      }
+    },
+    "stats.shutter.1sover" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "1s or more" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "1s以上" } }
+      }
+    },
+    "stats.shutter.1000under" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "1/1000s or less" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "1/1000s以下" } }
+      }
+    }
+  },
+  "version" : "1.0"
+}

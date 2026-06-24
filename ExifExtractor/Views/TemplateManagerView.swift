@@ -19,10 +19,10 @@ struct TemplateManagerView: View {
         .frame(minWidth: 680, minHeight: 460)
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {
-                Button("完了") { dismiss() }
+                Button("action.done") { dismiss() }
             }
         }
-        .navigationTitle("テンプレートを管理")
+        .navigationTitle("template.manager.title")
         .onChange(of: selectedID) { _, id in
             editingTemplate = templateVM.templates.first { $0.id == id }
         }
@@ -72,7 +72,7 @@ struct TemplateManagerView: View {
                             .frame(width: 28, height: 28)
                     }
                     .buttonStyle(.plain)
-                    .help("テンプレートを追加")
+                    .help("template.add.tooltip")
 
                     Button {
                         guard let id = selectedID,
@@ -84,7 +84,7 @@ struct TemplateManagerView: View {
                     }
                     .buttonStyle(.plain)
                     .disabled(selectedID == nil)
-                    .help("テンプレートを削除")
+                    .help("template.delete.tooltip")
 
                     Spacer()
                 }
@@ -110,12 +110,12 @@ struct TemplateManagerView: View {
 
     private func nameField(template: CopyTemplate) -> some View {
         VStack(alignment: .leading, spacing: 6) {
-            Text("テンプレート名")
+            Text("template.field.name.label")
                 .font(.caption)
                 .fontWeight(.semibold)
                 .foregroundStyle(.secondary)
 
-            TextField("名前", text: Binding(
+            TextField("template.field.name.placeholder", text: Binding(
                 get: { editingTemplate?.name ?? "" },
                 set: { newValue in
                     editingTemplate?.name = newValue
@@ -128,7 +128,7 @@ struct TemplateManagerView: View {
 
     private func formatField(template: CopyTemplate) -> some View {
         VStack(alignment: .leading, spacing: 6) {
-            Text("フォーマット")
+            Text("template.field.format.label")
                 .font(.caption)
                 .fontWeight(.semibold)
                 .foregroundStyle(.secondary)
@@ -147,7 +147,7 @@ struct TemplateManagerView: View {
                     .strokeBorder(Color(NSColor.separatorColor), lineWidth: 0.5)
             )
 
-            Text("プレースホルダーを {} で囲んで使います。例: {cameraName} f/{f} ISO{iso}")
+            Text("template.field.format.hint")
                 .font(.caption2)
                 .foregroundStyle(.secondary)
         }
@@ -155,7 +155,7 @@ struct TemplateManagerView: View {
 
     private func previewSection(template: CopyTemplate) -> some View {
         VStack(alignment: .leading, spacing: 6) {
-            Text("プレビュー")
+            Text("template.field.preview.label")
                 .font(.caption)
                 .fontWeight(.semibold)
                 .foregroundStyle(.secondary)
@@ -167,14 +167,15 @@ struct TemplateManagerView: View {
                 return TemplateRenderer.preview(format: template.format)
             }()
 
+            let isEmpty = previewText.isEmpty
             HStack {
-                Text(previewText.isEmpty ? "（空）" : previewText)
+                Text(isEmpty ? String(localized: "template.preview.empty") : previewText)
                     .font(.callout)
-                    .foregroundStyle(previewText.isEmpty ? .tertiary : .primary)
+                    .foregroundStyle(isEmpty ? .tertiary : .primary)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .textSelection(.enabled)
 
-                if !previewText.isEmpty {
+                if !isEmpty {
                     Button {
                         NSPasteboard.general.clearContents()
                         NSPasteboard.general.setString(previewText, forType: .string)
@@ -183,7 +184,7 @@ struct TemplateManagerView: View {
                             .font(.caption)
                     }
                     .buttonStyle(.plain)
-                    .help("コピー")
+                    .help("action.copy")
                 }
             }
             .padding(10)
@@ -196,7 +197,7 @@ struct TemplateManagerView: View {
             )
 
             if appVM.selectedPhoto == nil {
-                Text("写真を選択するとEXIFデータを使ったプレビューが表示されます")
+                Text("template.preview.hint")
                     .font(.caption2)
                     .foregroundStyle(.tertiary)
             }
@@ -205,7 +206,7 @@ struct TemplateManagerView: View {
 
     private var placeholderReference: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("利用可能なプレースホルダー")
+            Text("template.placeholders.title")
                 .font(.caption)
                 .fontWeight(.semibold)
                 .foregroundStyle(.secondary)
@@ -231,7 +232,7 @@ struct TemplateManagerView: View {
             Image(systemName: "doc.text")
                 .font(.system(size: 36))
                 .foregroundStyle(.tertiary)
-            Text("テンプレートを選択するか、\n+ ボタンで新規作成してください")
+            Text("template.empty.editor")
                 .multilineTextAlignment(.center)
                 .font(.callout)
                 .foregroundStyle(.secondary)
@@ -282,7 +283,7 @@ private struct PlaceholderRow: View {
                     .foregroundStyle(Color.accentColor)
             }
             .buttonStyle(.plain)
-            .help("フォーマットに追加")
+            .help("template.placeholder.insert.tooltip")
         }
         .padding(.horizontal, 10)
         .padding(.vertical, 6)

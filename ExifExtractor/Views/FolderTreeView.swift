@@ -7,7 +7,7 @@ struct FolderTreeView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             HStack {
-                Text("フォルダ")
+                Text("folder.panel.title")
                     .font(.subheadline)
                     .fontWeight(.semibold)
                     .foregroundStyle(.secondary)
@@ -20,7 +20,7 @@ struct FolderTreeView: View {
                 }
                 .buttonStyle(.plain)
                 .disabled(viewModel.currentPhotos.isEmpty)
-                .help("撮影統計を表示")
+                .help("folder.stats.tooltip")
 
                 Button {
                     viewModel.addFolder()
@@ -29,7 +29,7 @@ struct FolderTreeView: View {
                         .font(.system(size: 12, weight: .medium))
                 }
                 .buttonStyle(.plain)
-                .help("フォルダを追加")
+                .help("folder.add.tooltip")
             }
             .padding(.horizontal, 12)
             .padding(.vertical, 10)
@@ -57,7 +57,7 @@ struct FolderTreeView: View {
                     FolderRow(folder: folder)
                         .contextMenu {
                             if viewModel.folders.contains(where: { $0.id == folder.id }) {
-                                Button("フォルダを削除", role: .destructive) {
+                                Button("folder.remove.menu", role: .destructive) {
                                     viewModel.removeFolder(folder)
                                 }
                             }
@@ -73,10 +73,10 @@ struct FolderTreeView: View {
             Image(systemName: "folder.badge.plus")
                 .font(.system(size: 40))
                 .foregroundStyle(.tertiary)
-            Text("フォルダを追加してください")
+            Text("folder.empty.message")
                 .font(.caption)
                 .foregroundStyle(.secondary)
-            Button("フォルダを選択") {
+            Button("folder.select.button") {
                 viewModel.addFolder()
             }
             .buttonStyle(.bordered)
@@ -95,7 +95,7 @@ private struct FolderRow: View {
             VStack(alignment: .leading, spacing: 1) {
                 Text(folder.name)
                     .lineLimit(1)
-                Text("\(folder.photos.count)枚")
+                Text(String(format: String(localized: "folder.photo.count"), folder.photos.count))
                     .font(.caption2)
                     .foregroundStyle(.tertiary)
             }
