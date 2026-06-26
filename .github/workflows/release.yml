@@ -30,7 +30,7 @@ jobs:
 
       - name: Download Sparkle tools
         run: |
-          SPARKLE_VERSION="2.7.5"
+          SPARKLE_VERSION="2.9.3"
           curl -fsSL "https://github.com/sparkle-project/Sparkle/releases/download/${SPARKLE_VERSION}/Sparkle-${SPARKLE_VERSION}.tar.xz" \
             -o "$RUNNER_TEMP/Sparkle.tar.xz"
           mkdir -p "$SPARKLE_DIR"
@@ -120,7 +120,8 @@ jobs:
           ZIP_PATH="$RUNNER_TEMP/ExifExtractor-$VERSION.zip"
           ditto -c -k --keepParent "$EXPORT_PATH/ExifExtractor.app" "$ZIP_PATH"
 
-          ED_SIGNATURE=$("$SPARKLE_DIR/bin/sign_update" "$ZIP_PATH" --ed-key <(echo "$SPARKLE_PRIVATE_KEY") | grep -oE '[A-Za-z0-9+/=]{80,}')
+          SIGN_OUTPUT=$("$SPARKLE_DIR/bin/sign_update" "$ZIP_PATH" --ed-key-file <(echo "$SPARKLE_PRIVATE_KEY"))
+          ED_SIGNATURE=$(echo "$SIGN_OUTPUT" | grep -oP '(?<=sparkle:edSignature=")[^"]+')
           ZIP_SIZE=$(stat -f%z "$ZIP_PATH")
           PUB_DATE=$(date -u "+%a, %d %b %Y %H:%M:%S +0000")
           DOWNLOAD_URL="https://github.com/michimani/exif-extractor-macos/releases/download/v${VERSION}/ExifExtractor-${VERSION}.zip"
