@@ -28,20 +28,20 @@ struct ExifExtractorApp: App {
         .defaultSize(width: 1200, height: 750)
         .commands {
             CommandGroup(after: .appInfo) {
-                Button("updater.check.menu") {
+                Button(String(localized: "updater.check.menu", bundle: settings.bundle)) {
                     updaterController.updater.checkForUpdates()
                 }
                 .disabled(!updaterController.updater.canCheckForUpdates)
             }
             CommandGroup(after: .newItem) {
-                Button("folder.add.menu") {
+                Button(String(localized: "folder.add.menu", bundle: settings.bundle)) {
                     viewModel.addFolder()
                 }
                 .keyboardShortcut("o", modifiers: [.command, .shift])
             }
             CommandGroup(replacing: .newItem) {}
             CommandGroup(replacing: .help) {
-                Button("help.menu.open") {
+                Button(String(localized: "help.menu.open", bundle: settings.bundle)) {
                     openHelp()
                 }
             }
