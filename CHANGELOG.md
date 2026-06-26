@@ -1,5 +1,9 @@
 # Changelog
 
+## [v0.1.2](https://github.com/michimani/exif-extractor-macos/compare/v/v0.1.1...v/v0.1.2) - 2026-06-26
+
+- fix: correct YAML syntax in release workflow to enable tag-based triggering by @michimani in https://github.com/michimani/exif-extractor-macos/pull/9
+
 ## [v0.1.1](https://github.com/michimani/exif-extractor-macos/compare/v/v0.1.0...v/v0.1.1) - 2026-06-26
 
 - Fix YAML syntax error in release workflow by @michimani in https://github.com/michimani/exif-extractor-macos/pull/7
