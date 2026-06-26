@@ -168,7 +168,6 @@ jobs:
           files: |
             ${{ env.PKG_DIR }}/ExifExtractor-${{ env.VERSION }}.pkg
             ${{ env.ZIP_PATH }}
-          generate_release_notes: true
 
       - name: Update appcast.xml
         run: |
