@@ -2,6 +2,7 @@ import SwiftUI
 
 struct TemplateCopySection: View {
     @EnvironmentObject var templateVM: TemplateViewModel
+    @EnvironmentObject var settings: SettingsStore
     let photo: PhotoItem
     @State private var showManager = false
     @State private var copiedID: UUID?
@@ -11,7 +12,7 @@ struct TemplateCopySection: View {
             if templateVM.templates.isEmpty {
                 HStack {
                     Text("template.copy.empty")
-                        .font(.caption)
+                        .font(.system(size: settings.fontSize.pointSize - 2))
                         .foregroundStyle(.secondary)
                     Spacer()
                 }
@@ -23,9 +24,7 @@ struct TemplateCopySection: View {
                         template: template,
                         photo: photo,
                         isCopied: copiedID == template.id,
-                        onCopy: {
-                            copy(template: template)
-                        }
+                        onCopy: { copy(template: template) }
                     )
                 }
             }
@@ -37,7 +36,7 @@ struct TemplateCopySection: View {
                     Image(systemName: "slider.horizontal.3")
                     Text("template.manage.button")
                 }
-                .font(.caption)
+                .font(.system(size: settings.fontSize.pointSize - 2))
                 .foregroundStyle(Color.accentColor)
             }
             .buttonStyle(.plain)
@@ -67,6 +66,7 @@ private struct TemplateCopyRow: View {
     let photo: PhotoItem
     let isCopied: Bool
     let onCopy: () -> Void
+    @EnvironmentObject var settings: SettingsStore
 
     private var rendered: String {
         TemplateRenderer.render(template: template, photo: photo)
@@ -76,10 +76,10 @@ private struct TemplateCopyRow: View {
         HStack(alignment: .top, spacing: 8) {
             VStack(alignment: .leading, spacing: 2) {
                 Text(template.name)
-                    .font(.caption)
+                    .font(.system(size: settings.fontSize.pointSize - 2))
                     .fontWeight(.medium)
                 Text(rendered)
-                    .font(.caption2)
+                    .font(.system(size: settings.fontSize.pointSize - 3))
                     .foregroundStyle(.secondary)
                     .lineLimit(2)
             }

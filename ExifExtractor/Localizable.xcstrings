@@ -18,6 +18,12 @@
         "ja" : { "stringUnit" : { "state" : "translated", "value" : "文字サイズ" } }
       }
     },
+    "settings.fontsize.xsmall" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Extra Small" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "極小" } }
+      }
+    },
     "settings.fontsize.small" : {
       "localizations" : {
         "en" : { "stringUnit" : { "state" : "translated", "value" : "Small" } },
@@ -34,6 +40,12 @@
       "localizations" : {
         "en" : { "stringUnit" : { "state" : "translated", "value" : "Large" } },
         "ja" : { "stringUnit" : { "state" : "translated", "value" : "大" } }
+      }
+    },
+    "settings.fontsize.xlarge" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Extra Large" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "極大" } }
       }
     },
 
