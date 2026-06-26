@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.2.1](https://github.com/michimani/exif-extractor-macos/compare/v/v0.2.0...v/v0.2.1) - 2026-06-26
+
+- fix: remove generate_release_notes to prevent duplicate release description by @michimani in https://github.com/michimani/exif-extractor-macos/pull/23
+- feat: add in-app language switching (日本語 / English) by @michimani in https://github.com/michimani/exif-extractor-macos/pull/24
+- feat: add README screenshots and fix in-app language switching by @michimani in https://github.com/michimani/exif-extractor-macos/pull/25
+
 ## [v0.2.0](https://github.com/michimani/exif-extractor-macos/compare/v/v0.1.5...v/v0.2.0) - 2026-06-26
 
 - Fix app version shown in Sparkle update dialog by @michimani in https://github.com/michimani/exif-extractor-macos/pull/17
