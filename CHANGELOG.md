@@ -1,5 +1,12 @@
 # Changelog
 
+## [v0.2.0](https://github.com/michimani/exif-extractor-macos/compare/v/v0.1.5...v/v0.2.0) - 2026-06-26
+
+- Fix app version shown in Sparkle update dialog by @michimani in https://github.com/michimani/exif-extractor-macos/pull/17
+- Add Preferences (⌘,) with font size and in-app Help by @michimani in https://github.com/michimani/exif-extractor-macos/pull/19
+- fix: rename .app bundle filename to EXIF Extractor.app by @michimani in https://github.com/michimani/exif-extractor-macos/pull/20
+- docs: add Preferences, Auto-Update, and Help sections to README by @michimani in https://github.com/michimani/exif-extractor-macos/pull/21
+
 ## [v0.1.5](https://github.com/michimani/exif-extractor-macos/compare/v/v0.1.4...v/v0.1.5) - 2026-06-26
 
 - fix: replace grep -oP with sed for BSD grep compatibility on macOS by @michimani in https://github.com/michimani/exif-extractor-macos/pull/15
