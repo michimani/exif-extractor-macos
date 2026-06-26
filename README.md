@@ -71,4 +71,4 @@ Select the **ExifExtractor** scheme and press **Run** (⌘R).
 
 ## License
 
-Copyright © 2026 michimani. All rights reserved.
+MIT License. Copyright © 2026 michimani. See [LICENSE](./LICENSE) for details.
