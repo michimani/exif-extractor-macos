@@ -5,5 +5,17 @@
         <link>https://github.com/michimani/exif-extractor-macos</link>
         <description>Most recent changes with links to updates.</description>
         <language>en</language>
+        <item>
+            <title>Version 0.1.5</title>
+            <sparkle:version>0.1.5</sparkle:version>
+            <sparkle:shortVersionString>0.1.5</sparkle:shortVersionString>
+            <pubDate>Fri, 26 Jun 2026 11:14:56 +0000</pubDate>
+            <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://github.com/michimani/exif-extractor-macos/releases/download/v0.1.5/ExifExtractor-0.1.5.zip"
+                sparkle:edSignature="o43AZTgU8h9HWBhR69Q3xJwBsUHFsa+OiH8AVyV8W0wuZxBkzjPgYHaWrYRtHAdEOk5wFPboQpey28KTKJDqCg=="
+                length="1509026"
+                type="application/octet-stream"/>
+        </item>
     </channel>
 </rss>
