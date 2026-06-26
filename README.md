@@ -44,6 +44,19 @@ Select a folder and open the Stats view to see aggregated charts and rankings ac
 - Camera and lens usage rankings
 - Summary: total photo count, EXIF-tagged count, and shooting date range
 
+### Preferences
+Open **Preferences** with **⌘,** to customize the app:
+
+- **Font Size** — adjust the text size in the EXIF panel and copy templates (5 steps: XS / S / M / L / XL)
+
+### Auto-Update
+EXIF Extractor checks for new versions automatically using [Sparkle](https://sparkle-project.org/). When an update is available, you will be notified and can install it in one click — no need to visit the Releases page manually.
+
+You can also check for updates at any time from the **EXIF Extractor** menu → **Check for Updates…**
+
+### Help
+Select **Help** from the menu bar to open the in-app Help window. It covers all keyboard shortcuts and a description of each feature.
+
 ## Requirements
 
 - macOS 15.0 (Sequoia) or later
