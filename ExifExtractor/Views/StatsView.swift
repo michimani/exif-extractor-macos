@@ -25,7 +25,7 @@ struct StatsView: View {
             .frame(minWidth: 720, minHeight: 520)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("action.done") { dismiss() }
+                    Button { dismiss() } label: { Text("action.done", bundle: bundle) }
                 }
             }
             .navigationTitle(Text(String(format: String(localized: "stats.title", bundle: bundle), folderName)))
@@ -36,7 +36,7 @@ struct StatsView: View {
     private var loadingView: some View {
         VStack(spacing: 16) {
             ProgressView(value: progress) {
-                Text("stats.loading.message")
+                Text("stats.loading.message", bundle: bundle)
                     .font(.callout)
             }
             .progressViewStyle(.linear)
@@ -54,7 +54,7 @@ struct StatsView: View {
             Image(systemName: "chart.bar.xaxis")
                 .font(.system(size: 44))
                 .foregroundStyle(.tertiary)
-            Text("stats.empty.message")
+            Text("stats.empty.message", bundle: bundle)
                 .font(.callout)
                 .foregroundStyle(.secondary)
         }
@@ -127,13 +127,13 @@ struct StatsView: View {
     private func summaryPill(value: String, label: LocalizedStringKey) -> some View {
         VStack(alignment: .leading, spacing: 2) {
             Text(value).font(.headline)
-            Text(label).font(.caption).foregroundStyle(.secondary)
+            Text(label, bundle: bundle).font(.caption).foregroundStyle(.secondary)
         }
     }
 
     private func chartCard(title: LocalizedStringKey, systemImage: String, data: [StatEntry], color: Color) -> some View {
         VStack(alignment: .leading, spacing: 10) {
-            Label(title, systemImage: systemImage)
+            Label { Text(title, bundle: bundle) } icon: { Image(systemName: systemImage) }
                 .font(.callout)
                 .fontWeight(.semibold)
 
@@ -161,7 +161,7 @@ struct StatsView: View {
 
     private func rankingCard(title: LocalizedStringKey, systemImage: String, entries: [StatEntry], total: Int) -> some View {
         VStack(alignment: .leading, spacing: 10) {
-            Label(title, systemImage: systemImage)
+            Label { Text(title, bundle: bundle) } icon: { Image(systemName: systemImage) }
                 .font(.callout)
                 .fontWeight(.semibold)
 

@@ -20,10 +20,10 @@ struct TemplateManagerView: View {
         .frame(minWidth: 680, minHeight: 460)
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {
-                Button("action.done") { dismiss() }
+                Button { dismiss() } label: { Text("action.done", bundle: bundle) }
             }
         }
-        .navigationTitle("template.manager.title")
+        .navigationTitle(Text("template.manager.title", bundle: bundle))
         .onChange(of: selectedID) { _, id in
             editingTemplate = templateVM.templates.first { $0.id == id }
         }
@@ -111,12 +111,12 @@ struct TemplateManagerView: View {
 
     private func nameField(template: CopyTemplate) -> some View {
         VStack(alignment: .leading, spacing: 6) {
-            Text("template.field.name.label")
+            Text("template.field.name.label", bundle: bundle)
                 .font(.caption)
                 .fontWeight(.semibold)
                 .foregroundStyle(.secondary)
 
-            TextField("template.field.name.placeholder", text: Binding(
+            TextField(String(localized: "template.field.name.placeholder", bundle: bundle), text: Binding(
                 get: { editingTemplate?.name ?? "" },
                 set: { newValue in
                     editingTemplate?.name = newValue
@@ -129,7 +129,7 @@ struct TemplateManagerView: View {
 
     private func formatField(template: CopyTemplate) -> some View {
         VStack(alignment: .leading, spacing: 6) {
-            Text("template.field.format.label")
+            Text("template.field.format.label", bundle: bundle)
                 .font(.caption)
                 .fontWeight(.semibold)
                 .foregroundStyle(.secondary)
@@ -148,7 +148,7 @@ struct TemplateManagerView: View {
                     .strokeBorder(Color(NSColor.separatorColor), lineWidth: 0.5)
             )
 
-            Text("template.field.format.hint")
+            Text("template.field.format.hint", bundle: bundle)
                 .font(.caption2)
                 .foregroundStyle(.secondary)
         }
@@ -156,7 +156,7 @@ struct TemplateManagerView: View {
 
     private func previewSection(template: CopyTemplate) -> some View {
         VStack(alignment: .leading, spacing: 6) {
-            Text("template.field.preview.label")
+            Text("template.field.preview.label", bundle: bundle)
                 .font(.caption)
                 .fontWeight(.semibold)
                 .foregroundStyle(.secondary)
@@ -198,7 +198,7 @@ struct TemplateManagerView: View {
             )
 
             if appVM.selectedPhoto == nil {
-                Text("template.preview.hint")
+                Text("template.preview.hint", bundle: bundle)
                     .font(.caption2)
                     .foregroundStyle(.tertiary)
             }
@@ -207,7 +207,7 @@ struct TemplateManagerView: View {
 
     private var placeholderReference: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("template.placeholders.title")
+            Text("template.placeholders.title", bundle: bundle)
                 .font(.caption)
                 .fontWeight(.semibold)
                 .foregroundStyle(.secondary)
@@ -233,7 +233,7 @@ struct TemplateManagerView: View {
             Image(systemName: "doc.text")
                 .font(.system(size: 36))
                 .foregroundStyle(.tertiary)
-            Text("template.empty.editor")
+            Text("template.empty.editor", bundle: bundle)
                 .multilineTextAlignment(.center)
                 .font(.callout)
                 .foregroundStyle(.secondary)
@@ -257,6 +257,7 @@ struct TemplateManagerView: View {
 private struct PlaceholderRow: View {
     let placeholder: TemplatePlaceholder
     let onInsert: () -> Void
+    @Environment(\.localizationBundle) private var bundle
 
     var body: some View {
         HStack(spacing: 10) {
@@ -266,7 +267,7 @@ private struct PlaceholderRow: View {
                 .foregroundStyle(Color.accentColor)
                 .frame(width: 120, alignment: .leading)
 
-            Text(placeholder.label)
+            Text(placeholder.label(using: bundle))
                 .font(.caption)
                 .foregroundStyle(.primary)
 
