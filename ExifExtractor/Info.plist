@@ -26,5 +26,9 @@
 	<string>Copyright © 2026 michimani. All rights reserved.</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>SUFeedURL</key>
+	<string>https://raw.githubusercontent.com/michimani/exif-extractor-macos/main/appcast.xml</string>
+	<key>SUPublicEDKey</key>
+	<string>SPARKLE_PUBLIC_ED_KEY_PLACEHOLDER</string>
 </dict>
 </plist>
