@@ -2,25 +2,46 @@ import SwiftUI
 
 struct SettingsView: View {
     @EnvironmentObject var settings: SettingsStore
+    @State private var selectedLanguage: AppLanguage = .japanese
+    @State private var selectedFontSize: ContentFontSize = .medium
 
     var body: some View {
         Form {
             Section {
-                FontSizeStepSlider(selection: Binding(
-                    get: { settings.fontSize },
-                    set: { settings.fontSize = $0 }
-                ))
-                .padding(.vertical, 4)
+                Picker("", selection: $selectedLanguage) {
+                    ForEach(AppLanguage.allCases, id: \.self) { lang in
+                        Text(lang.displayName).tag(lang)
+                    }
+                }
+                .pickerStyle(.segmented)
+                .labelsHidden()
+            } header: {
+                Text("settings.language.label")
+            }
+
+            Section {
+                FontSizeStepSlider(selection: $selectedFontSize)
+                    .padding(.vertical, 4)
             } header: {
                 Text("settings.fontsize.label")
             } footer: {
-                Text(settings.fontSize.labelKey)
+                Text(selectedFontSize.labelKey)
                     .frame(maxWidth: .infinity, alignment: .center)
             }
         }
         .formStyle(.grouped)
         .frame(width: 340)
         .padding(.vertical, 8)
+        .onAppear {
+            selectedLanguage = settings.appLanguage
+            selectedFontSize = settings.fontSize
+        }
+        .onChange(of: selectedLanguage) { newValue in
+            settings.appLanguage = newValue
+        }
+        .onChange(of: selectedFontSize) { newValue in
+            settings.fontSize = newValue
+        }
     }
 }
 

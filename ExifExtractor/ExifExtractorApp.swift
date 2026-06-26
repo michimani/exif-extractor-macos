@@ -22,24 +22,26 @@ struct ExifExtractorApp: App {
                 .environmentObject(viewModel)
                 .environmentObject(templateVM)
                 .environmentObject(settings)
+                .environment(\.locale, settings.locale)
+                .environment(\.localizationBundle, settings.bundle)
         }
         .defaultSize(width: 1200, height: 750)
         .commands {
             CommandGroup(after: .appInfo) {
-                Button("updater.check.menu") {
+                Button(String(localized: "updater.check.menu", bundle: settings.bundle)) {
                     updaterController.updater.checkForUpdates()
                 }
                 .disabled(!updaterController.updater.canCheckForUpdates)
             }
             CommandGroup(after: .newItem) {
-                Button("folder.add.menu") {
+                Button(String(localized: "folder.add.menu", bundle: settings.bundle)) {
                     viewModel.addFolder()
                 }
                 .keyboardShortcut("o", modifiers: [.command, .shift])
             }
             CommandGroup(replacing: .newItem) {}
             CommandGroup(replacing: .help) {
-                Button("help.menu.open") {
+                Button(String(localized: "help.menu.open", bundle: settings.bundle)) {
                     openHelp()
                 }
             }
@@ -48,6 +50,8 @@ struct ExifExtractorApp: App {
         Settings {
             SettingsView()
                 .environmentObject(settings)
+                .environment(\.locale, settings.locale)
+                .environment(\.localizationBundle, settings.bundle)
         }
     }
 
@@ -59,7 +63,11 @@ struct ExifExtractorApp: App {
             defer: false
         )
         window.title = String(localized: "help.window.title")
-        window.contentView = NSHostingView(rootView: HelpView())
+        window.contentView = NSHostingView(
+            rootView: HelpView()
+                .environment(\.locale, settings.locale)
+                .environment(\.localizationBundle, settings.bundle)
+        )
         window.center()
         window.makeKeyAndOrderFront(nil)
     }

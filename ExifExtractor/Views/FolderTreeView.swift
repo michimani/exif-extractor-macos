@@ -103,13 +103,14 @@ struct FolderTreeView: View {
 
 private struct FolderRow: View {
     let folder: FolderItem
+    @Environment(\.localizationBundle) var bundle
 
     var body: some View {
         Label {
             VStack(alignment: .leading, spacing: 1) {
                 Text(folder.name)
                     .lineLimit(1)
-                Text(String(format: String(localized: "folder.photo.count"), folder.photos.count))
+                Text(String(format: String(localized: "folder.photo.count", bundle: bundle), folder.photos.count))
                     .font(.caption2)
                     .foregroundStyle(.tertiary)
             }

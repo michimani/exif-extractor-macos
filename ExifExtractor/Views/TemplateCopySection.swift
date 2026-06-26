@@ -67,6 +67,7 @@ private struct TemplateCopyRow: View {
     let isCopied: Bool
     let onCopy: () -> Void
     @EnvironmentObject var settings: SettingsStore
+    @Environment(\.localizationBundle) private var bundle
 
     private var rendered: String {
         TemplateRenderer.render(template: template, photo: photo)
@@ -91,7 +92,7 @@ private struct TemplateCopyRow: View {
                     .frame(width: 16)
             }
             .buttonStyle(.plain)
-            .help(Text(String(format: String(localized: "template.copy.tooltip"), template.name)))
+            .help(Text(String(format: String(localized: "template.copy.tooltip", bundle: bundle), template.name)))
         }
         .padding(.horizontal, 10)
         .padding(.vertical, 7)

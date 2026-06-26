@@ -5,6 +5,7 @@ struct StatsView: View {
     let folderName: String
     let photos: [PhotoItem]
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.localizationBundle) private var bundle
 
     @State private var stats: PhotoStats?
     @State private var isLoading = true
@@ -27,7 +28,7 @@ struct StatsView: View {
                     Button("action.done") { dismiss() }
                 }
             }
-            .navigationTitle(Text(String(format: String(localized: "stats.title"), folderName)))
+            .navigationTitle(Text(String(format: String(localized: "stats.title", bundle: bundle), folderName)))
         }
         .task { await loadStats() }
     }
@@ -40,7 +41,7 @@ struct StatsView: View {
             }
             .progressViewStyle(.linear)
             .frame(width: 320)
-            Text(String(format: String(localized: "stats.loading.progress"),
+            Text(String(format: String(localized: "stats.loading.progress", bundle: bundle),
                         Int(progress * Double(photos.count)), photos.count))
                 .font(.caption)
                 .foregroundStyle(.secondary)
@@ -139,7 +140,7 @@ struct StatsView: View {
             let maxCount = data.map(\.count).max() ?? 1
             Chart(data) { entry in
                 BarMark(
-                    x: .value(String(localized: "stats.chart.unit"), entry.count),
+                    x: .value(String(localized: "stats.chart.unit", bundle: bundle), entry.count),
                     y: .value("", entry.label)
                 )
                 .foregroundStyle(color.gradient)
@@ -180,7 +181,7 @@ struct StatsView: View {
                         Spacer()
 
                         let pct = total > 0 ? Int(Double(entry.count) / Double(total) * 100) : 0
-                        Text(String(format: String(localized: "stats.ranking.count"), entry.count, pct))
+                        Text(String(format: String(localized: "stats.ranking.count", bundle: bundle), entry.count, pct))
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }
