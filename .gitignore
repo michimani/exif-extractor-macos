@@ -33,3 +33,6 @@ Package.resolved
 # Xcode project / workspace — keep shared data, ignore user-specific data
 *.xcodeproj/xcuserdata/
 *.xcworkspace/xcuserdata/
+
+# Claude Code local settings
+.claude/settings.local.json

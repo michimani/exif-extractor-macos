@@ -51,6 +51,9 @@ jobs:
           security set-key-partition-list -S apple-tool:,apple: \
             -s -k "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
 
+      - name: Accept Xcode License
+        run: sudo xcodebuild -license accept
+
       - name: Build archive
         run: |
           xcodebuild archive \
