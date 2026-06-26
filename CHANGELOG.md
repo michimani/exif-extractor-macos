@@ -1,5 +1,9 @@
 # Changelog
 
+## [v0.1.1](https://github.com/michimani/exif-extractor-macos/compare/v/v0.1.0...v/v0.1.1) - 2026-06-26
+
+- Fix YAML syntax error in release workflow by @michimani in https://github.com/michimani/exif-extractor-macos/pull/7
+
 ## [v0.1.0](https://github.com/michimani/exif-extractor-macos/compare/v0.1.0...v/v0.1.0) - 2026-06-26
 
 - Set up automated versioning and release workflow with tagpr by @michimani in https://github.com/michimani/exif-extractor-macos/pull/2
