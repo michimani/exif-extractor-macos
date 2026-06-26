@@ -5,6 +5,9 @@ A macOS app for browsing photos and viewing their EXIF metadata — camera setti
 ## Features
 
 ### Photo Browser
+
+![Main View](docs/screenshots/main_view.png)
+
 - Navigate your photo library through a folder tree in the sidebar
 - Browse photos in a thumbnail strip at the bottom of the window
 - Use **arrow keys** (← / →) to move between photos
@@ -24,6 +27,9 @@ Displays the following metadata for each selected photo:
 Each field has a copy button so you can grab individual values with one click.
 
 ### Copy Templates
+
+![Template Manager](docs/screenshots/template_manager.png)
+
 Define reusable text templates to copy shooting info in a consistent format. Built-in defaults include:
 
 | Template | Example output |
@@ -38,6 +44,9 @@ You can create your own templates using the following placeholders:
 `{make}` `{model}` `{cameraName}` `{lens}` `{focalLength}` `{f}` `{iso}` `{shutterSpeed}` `{ev}` `{date}` `{width}` `{height}` `{resolution}` `{filename}`
 
 ### Shooting Stats
+
+![Stats View](docs/screenshots/stats_view.png)
+
 Select a folder and open the Stats view to see aggregated charts and rankings across all photos in that folder:
 
 - Distribution charts for focal length, aperture, ISO, and shutter speed
@@ -45,8 +54,12 @@ Select a folder and open the Stats view to see aggregated charts and rankings ac
 - Summary: total photo count, EXIF-tagged count, and shooting date range
 
 ### Preferences
+
+![Preferences](docs/screenshots/preferences.png)
+
 Open **Preferences** with **⌘,** to customize the app:
 
+- **Language** — switch the app language between 日本語 and English
 - **Font Size** — adjust the text size in the EXIF panel and copy templates (5 steps: XS / S / M / L / XL)
 
 ### Auto-Update

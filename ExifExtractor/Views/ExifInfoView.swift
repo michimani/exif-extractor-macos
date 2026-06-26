@@ -117,12 +117,13 @@ struct ExifInfoView: View {
 }
 
 struct ExifSection<Content: View>: View {
-    let title: LocalizedStringKey
+    let title: String
     @ViewBuilder let content: () -> Content
+    @Environment(\.localizationBundle) private var bundle
 
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
-            Text(title)
+            Text(verbatim: bundle.localizedString(forKey: title, value: title, table: nil))
                 .font(.caption)
                 .fontWeight(.semibold)
                 .foregroundStyle(.secondary)
@@ -142,14 +143,15 @@ struct ExifSection<Content: View>: View {
 }
 
 struct ExifRow: View {
-    let label: LocalizedStringKey
+    let label: String
     let value: String
     @State private var isCopied = false
     @EnvironmentObject var settings: SettingsStore
+    @Environment(\.localizationBundle) private var bundle
 
     var body: some View {
         HStack(alignment: .top, spacing: 8) {
-            Text(label)
+            Text(verbatim: bundle.localizedString(forKey: label, value: label, table: nil))
                 .font(.system(size: settings.fontSize.pointSize - 2))
                 .foregroundStyle(.secondary)
                 .frame(width: 96, alignment: .leading)

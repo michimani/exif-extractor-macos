@@ -3,6 +3,7 @@ import SwiftUI
 struct TemplateCopySection: View {
     @EnvironmentObject var templateVM: TemplateViewModel
     @EnvironmentObject var settings: SettingsStore
+    @Environment(\.localizationBundle) private var bundle
     let photo: PhotoItem
     @State private var showManager = false
     @State private var copiedID: UUID?
@@ -11,7 +12,7 @@ struct TemplateCopySection: View {
         ExifSection(title: "template.copy.title") {
             if templateVM.templates.isEmpty {
                 HStack {
-                    Text("template.copy.empty")
+                    Text("template.copy.empty", bundle: bundle)
                         .font(.system(size: settings.fontSize.pointSize - 2))
                         .foregroundStyle(.secondary)
                     Spacer()
@@ -34,7 +35,7 @@ struct TemplateCopySection: View {
             } label: {
                 HStack {
                     Image(systemName: "slider.horizontal.3")
-                    Text("template.manage.button")
+                    Text("template.manage.button", bundle: bundle)
                 }
                 .font(.system(size: settings.fontSize.pointSize - 2))
                 .foregroundStyle(Color.accentColor)

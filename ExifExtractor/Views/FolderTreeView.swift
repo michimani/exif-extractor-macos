@@ -2,12 +2,13 @@ import SwiftUI
 
 struct FolderTreeView: View {
     @EnvironmentObject var viewModel: AppViewModel
+    @Environment(\.localizationBundle) private var bundle
     @State private var showStats = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             HStack {
-                Text("folder.panel.title")
+                Text("folder.panel.title", bundle: bundle)
                     .font(.subheadline)
                     .fontWeight(.semibold)
                     .foregroundStyle(.secondary)
@@ -66,13 +67,13 @@ struct FolderTreeView: View {
                 ) { folder in
                     FolderRow(folder: folder)
                         .contextMenu {
-                            Button("folder.reload.menu") {
-                                viewModel.reloadFolder(folder)
+                            Button { viewModel.reloadFolder(folder) } label: {
+                                Text("folder.reload.menu", bundle: bundle)
                             }
                             if viewModel.folders.contains(where: { $0.id == folder.id }) {
                                 Divider()
-                                Button("folder.remove.menu", role: .destructive) {
-                                    viewModel.removeFolder(folder)
+                                Button(role: .destructive) { viewModel.removeFolder(folder) } label: {
+                                    Text("folder.remove.menu", bundle: bundle)
                                 }
                             }
                         }
@@ -87,11 +88,11 @@ struct FolderTreeView: View {
             Image(systemName: "folder.badge.plus")
                 .font(.system(size: 40))
                 .foregroundStyle(.tertiary)
-            Text("folder.empty.message")
+            Text("folder.empty.message", bundle: bundle)
                 .font(.caption)
                 .foregroundStyle(.secondary)
-            Button("folder.select.button") {
-                viewModel.addFolder()
+            Button { viewModel.addFolder() } label: {
+                Text("folder.select.button", bundle: bundle)
             }
             .buttonStyle(.bordered)
             .controlSize(.small)

@@ -2,6 +2,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @EnvironmentObject var settings: SettingsStore
+    @Environment(\.localizationBundle) private var bundle
     @State private var selectedLanguage: AppLanguage = .japanese
     @State private var selectedFontSize: ContentFontSize = .medium
 
@@ -16,16 +17,16 @@ struct SettingsView: View {
                 .pickerStyle(.segmented)
                 .labelsHidden()
             } header: {
-                Text("settings.language.label")
+                Text("settings.language.label", bundle: bundle)
             }
 
             Section {
                 FontSizeStepSlider(selection: $selectedFontSize)
                     .padding(.vertical, 4)
             } header: {
-                Text("settings.fontsize.label")
+                Text("settings.fontsize.label", bundle: bundle)
             } footer: {
-                Text(selectedFontSize.labelKey)
+                Text(selectedFontSize.labelKey, bundle: bundle)
                     .frame(maxWidth: .infinity, alignment: .center)
             }
         }

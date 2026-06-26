@@ -41,23 +41,27 @@ enum TemplatePlaceholder: String, CaseIterable {
 
     var placeholder: String { "{\(rawValue)}" }
 
-    var label: String {
+    var labelKey: String {
         switch self {
-        case .make:         return String(localized: "placeholder.label.make")
-        case .model:        return String(localized: "placeholder.label.model")
-        case .cameraName:   return String(localized: "placeholder.label.cameraName")
-        case .lens:         return String(localized: "placeholder.label.lens")
-        case .focalLength:  return String(localized: "placeholder.label.focalLength")
-        case .f:            return String(localized: "placeholder.label.f")
-        case .iso:          return String(localized: "placeholder.label.iso")
-        case .shutterSpeed: return String(localized: "placeholder.label.shutterSpeed")
-        case .ev:           return String(localized: "placeholder.label.ev")
-        case .date:         return String(localized: "placeholder.label.date")
-        case .width:        return String(localized: "placeholder.label.width")
-        case .height:       return String(localized: "placeholder.label.height")
-        case .resolution:   return String(localized: "placeholder.label.resolution")
-        case .filename:     return String(localized: "placeholder.label.filename")
+        case .make:         return "placeholder.label.make"
+        case .model:        return "placeholder.label.model"
+        case .cameraName:   return "placeholder.label.cameraName"
+        case .lens:         return "placeholder.label.lens"
+        case .focalLength:  return "placeholder.label.focalLength"
+        case .f:            return "placeholder.label.f"
+        case .iso:          return "placeholder.label.iso"
+        case .shutterSpeed: return "placeholder.label.shutterSpeed"
+        case .ev:           return "placeholder.label.ev"
+        case .date:         return "placeholder.label.date"
+        case .width:        return "placeholder.label.width"
+        case .height:       return "placeholder.label.height"
+        case .resolution:   return "placeholder.label.resolution"
+        case .filename:     return "placeholder.label.filename"
         }
+    }
+
+    func label(using bundle: Bundle = .main) -> String {
+        bundle.localizedString(forKey: labelKey, value: labelKey, table: nil)
     }
 
     var example: String {
