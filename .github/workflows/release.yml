@@ -12,12 +12,14 @@ jobs:
   release:
     runs-on: macos-15
 
-    env:
-      KEYCHAIN_PATH: ${{ runner.temp }}/signing.keychain-db
-      ARCHIVE_PATH: ${{ runner.temp }}/ExifExtractor.xcarchive
-      EXPORT_PATH: ${{ runner.temp }}/export
-
     steps:
+      - name: Set path variables
+        run: |
+          echo "KEYCHAIN_PATH=$RUNNER_TEMP/signing.keychain-db" >> $GITHUB_ENV
+          echo "ARCHIVE_PATH=$RUNNER_TEMP/ExifExtractor.xcarchive" >> $GITHUB_ENV
+          echo "EXPORT_PATH=$RUNNER_TEMP/export" >> $GITHUB_ENV
+          echo "PKG_DIR=$RUNNER_TEMP" >> $GITHUB_ENV
+
       - uses: actions/checkout@v4
 
       - name: Get version from tag
@@ -131,7 +133,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           name: "EXIF Extractor v${{ env.VERSION }}"
-          files: ${{ runner.temp }}/ExifExtractor-${{ env.VERSION }}.pkg
+          files: ${{ env.PKG_DIR }}/ExifExtractor-${{ env.VERSION }}.pkg
           generate_release_notes: true
 
       - name: Clean up keychain
