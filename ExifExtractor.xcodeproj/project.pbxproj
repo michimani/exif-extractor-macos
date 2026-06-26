@@ -47,7 +47,7 @@
 		AA00000000000000000022CC /* FolderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderManager.swift; sourceTree = "<group>"; };
 		AA00000000000000000023CC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AA00000000000000000024CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AA00000000000000000025CC /* ExifExtractor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExifExtractor.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA00000000000000000025CC /* ExifExtractor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EXIF Extractor.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA00000000000000000081CC /* CopyTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyTemplate.swift; sourceTree = "<group>"; };
 		AA00000000000000000082CC /* TemplateRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateRenderer.swift; sourceTree = "<group>"; };
 		AA00000000000000000083CC /* TemplateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateViewModel.swift; sourceTree = "<group>"; };
@@ -274,7 +274,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 0.1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.michimani.ExifExtractor;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "EXIF Extractor";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
@@ -300,7 +300,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 0.1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.michimani.ExifExtractor;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "EXIF Extractor";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
