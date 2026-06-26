@@ -1,5 +1,9 @@
 # Changelog
 
+## [v0.1.5](https://github.com/michimani/exif-extractor-macos/compare/v/v0.1.4...v/v0.1.5) - 2026-06-26
+
+- fix: replace grep -oP with sed for BSD grep compatibility on macOS by @michimani in https://github.com/michimani/exif-extractor-macos/pull/15
+
 ## [v0.1.4](https://github.com/michimani/exif-extractor-macos/compare/v/v0.1.3...v/v0.1.4) - 2026-06-26
 
 - fix: pass GH_PAT to actions/checkout so tagpr tag pushes trigger release workflow by @michimani in https://github.com/michimani/exif-extractor-macos/pull/13
