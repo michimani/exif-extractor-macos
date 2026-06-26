@@ -30,6 +30,9 @@
 		AA000000000000000000B3CC /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000A3CC /* StatsView.swift */; };
 		AA000000000000000000D1CC /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000C1CC /* Localizable.xcstrings */; };
 		AA000000000000000001F3CC /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = AA000000000000000001F2CC /* Sparkle */; };
+		AA000000000000000002E2CC /* SettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000002E1CC /* SettingsStore.swift */; };
+		AA000000000000000002E4CC /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000002E3CC /* SettingsView.swift */; };
+		AA000000000000000002E6CC /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000002E5CC /* HelpView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +61,9 @@
 		AA000000000000000000A3CC /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
 		AA000000000000000000C1CC /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		AA000000000000000000E1CC /* ExifExtractor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ExifExtractor.entitlements; sourceTree = "<group>"; };
+		AA000000000000000002E1CC /* SettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStore.swift; sourceTree = "<group>"; };
+		AA000000000000000002E3CC /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		AA000000000000000002E5CC /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +119,7 @@
 				AA00000000000000000015CC /* FolderItem.swift */,
 				AA00000000000000000081CC /* CopyTemplate.swift */,
 				AA000000000000000000A1CC /* PhotoStats.swift */,
+				AA000000000000000002E1CC /* SettingsStore.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -136,6 +143,8 @@
 				AA00000000000000000084CC /* TemplateCopySection.swift */,
 				AA00000000000000000085CC /* TemplateManagerView.swift */,
 				AA000000000000000000A3CC /* StatsView.swift */,
+				AA000000000000000002E3CC /* SettingsView.swift */,
+				AA000000000000000002E5CC /* HelpView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -248,6 +257,9 @@
 				AA000000000000000000B1CC /* PhotoStats.swift in Sources */,
 				AA000000000000000000B2CC /* StatsCalculator.swift in Sources */,
 				AA000000000000000000B3CC /* StatsView.swift in Sources */,
+				AA000000000000000002E2CC /* SettingsStore.swift in Sources */,
+				AA000000000000000002E4CC /* SettingsView.swift in Sources */,
+				AA000000000000000002E6CC /* HelpView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
