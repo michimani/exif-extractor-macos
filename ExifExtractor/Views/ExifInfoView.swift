@@ -3,6 +3,7 @@ import SwiftUI
 struct ExifInfoView: View {
     @EnvironmentObject var viewModel: AppViewModel
     @EnvironmentObject var templateVM: TemplateViewModel
+    @EnvironmentObject var settings: SettingsStore
 
     var body: some View {
         ScrollView {
@@ -144,17 +145,18 @@ struct ExifRow: View {
     let label: LocalizedStringKey
     let value: String
     @State private var isCopied = false
+    @EnvironmentObject var settings: SettingsStore
 
     var body: some View {
         HStack(alignment: .top, spacing: 8) {
             Text(label)
-                .font(.caption)
+                .font(.system(size: settings.fontSize.pointSize - 2))
                 .foregroundStyle(.secondary)
                 .frame(width: 96, alignment: .leading)
                 .fixedSize(horizontal: false, vertical: true)
 
             Text(value)
-                .font(.caption)
+                .font(.system(size: settings.fontSize.pointSize - 2))
                 .fontWeight(.medium)
                 .lineLimit(3)
                 .frame(maxWidth: .infinity, alignment: .leading)
