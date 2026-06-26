@@ -46,7 +46,7 @@ Select a folder and open the Stats view to see aggregated charts and rankings ac
 
 ## Requirements
 
-- macOS 15.0 or later
+- macOS 15.0 (Sequoia) or later
 
 ## Installation
 
