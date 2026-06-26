@@ -50,6 +50,18 @@
         "ja" : { "stringUnit" : { "state" : "translated", "value" : "フォルダを選択" } }
       }
     },
+    "folder.reload.tooltip" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Reload Folder" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "フォルダを再読み込み" } }
+      }
+    },
+    "folder.reload.menu" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Reload Folder" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "再読み込み" } }
+      }
+    },
     "folder.remove.menu" : {
       "localizations" : {
         "en" : { "stringUnit" : { "state" : "translated", "value" : "Remove Folder" } },
