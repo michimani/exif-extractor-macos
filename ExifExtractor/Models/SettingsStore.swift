@@ -61,17 +61,28 @@ enum ContentFontSize: String, CaseIterable {
 // MARK: - SettingsStore
 
 final class SettingsStore: ObservableObject {
-    @AppStorage("contentFontSize") var fontSizeRaw: String = ContentFontSize.medium.rawValue
-    @AppStorage("appLanguage") var appLanguageRaw: String = "ja"
+    @Published var fontSizeRaw: String
+    @Published var appLanguageRaw: String
+
+    init() {
+        self.fontSizeRaw    = UserDefaults.standard.string(forKey: "contentFontSize") ?? ContentFontSize.medium.rawValue
+        self.appLanguageRaw = UserDefaults.standard.string(forKey: "appLanguage") ?? "ja"
+    }
 
     var fontSize: ContentFontSize {
         get { ContentFontSize(rawValue: fontSizeRaw) ?? .medium }
-        set { fontSizeRaw = newValue.rawValue }
+        set {
+            fontSizeRaw = newValue.rawValue
+            UserDefaults.standard.set(newValue.rawValue, forKey: "contentFontSize")
+        }
     }
 
     var appLanguage: AppLanguage {
         get { AppLanguage(rawValue: appLanguageRaw) ?? .japanese }
-        set { appLanguageRaw = newValue.rawValue }
+        set {
+            appLanguageRaw = newValue.rawValue
+            UserDefaults.standard.set(newValue.rawValue, forKey: "appLanguage")
+        }
     }
 
     var locale: Locale { Locale(identifier: appLanguageRaw) }
