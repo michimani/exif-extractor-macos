@@ -170,32 +170,7 @@ jobs:
           generate_release_notes: true
 
       - name: Update appcast.xml
-        run: |
-          NEW_ITEM="        <item>
-            <title>Version $VERSION</title>
-            <sparkle:version>$VERSION</sparkle:version>
-            <sparkle:shortVersionString>$VERSION</sparkle:shortVersionString>
-            <pubDate>$PUB_DATE</pubDate>
-            <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
-            <enclosure
-                url=\"$DOWNLOAD_URL\"
-                sparkle:edSignature=\"$ED_SIGNATURE\"
-                length=\"$ZIP_SIZE\"
-                type=\"application/octet-stream\"/>
-        </item>"
-
-          python3 - <<PYEOF
-import re, os
-
-with open("appcast.xml", "r") as f:
-    content = f.read()
-
-new_item = os.environ["NEW_ITEM"]
-content = content.replace("    </channel>", f"{new_item}\n    </channel>")
-
-with open("appcast.xml", "w") as f:
-    f.write(content)
-PYEOF
+        run: python3 scripts/update_appcast.py
 
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
