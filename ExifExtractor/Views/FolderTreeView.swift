@@ -23,6 +23,16 @@ struct FolderTreeView: View {
                 .help("folder.stats.tooltip")
 
                 Button {
+                    viewModel.reloadSelectedFolder()
+                } label: {
+                    Image(systemName: "arrow.clockwise")
+                        .font(.system(size: 12, weight: .medium))
+                }
+                .buttonStyle(.plain)
+                .disabled(viewModel.selectedFolderID == nil)
+                .help("folder.reload.tooltip")
+
+                Button {
                     viewModel.addFolder()
                 } label: {
                     Image(systemName: "plus")
@@ -56,7 +66,11 @@ struct FolderTreeView: View {
                 ) { folder in
                     FolderRow(folder: folder)
                         .contextMenu {
+                            Button("folder.reload.menu") {
+                                viewModel.reloadFolder(folder)
+                            }
                             if viewModel.folders.contains(where: { $0.id == folder.id }) {
+                                Divider()
                                 Button("folder.remove.menu", role: .destructive) {
                                     viewModel.removeFolder(folder)
                                 }

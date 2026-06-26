@@ -28,6 +28,27 @@ final class AppViewModel: ObservableObject {
         saveFolderPaths()
     }
 
+    func reloadSelectedFolder() {
+        guard let id = selectedFolderID,
+              let folder = findFolder(id: id, in: folders) else { return }
+        reloadFolder(folder)
+    }
+
+    func reloadFolder(_ folder: FolderItem) {
+        updateFolder(id: folder.id, url: folder.url, in: &folders)
+        guard selectedFolderID == folder.id,
+              let updated = findFolder(id: folder.id, in: folders) else { return }
+        currentPhotos = updated.photos
+        if let current = selectedPhoto,
+           let match = updated.photos.first(where: { $0.url == current.url }) {
+            selectPhoto(match)
+        } else if !updated.photos.isEmpty {
+            selectPhoto(updated.photos[0])
+        } else {
+            selectedPhoto = nil
+        }
+    }
+
     func removeFolder(_ folder: FolderItem) {
         folders.removeAll { $0.id == folder.id }
         if selectedFolderID == folder.id {
@@ -73,6 +94,17 @@ final class AppViewModel: ObservableObject {
         guard !currentPhotos.isEmpty else { return }
         let prev = (selectedPhotoIndex - 1 + currentPhotos.count) % currentPhotos.count
         selectPhoto(currentPhotos[prev])
+    }
+
+    private func updateFolder(id: UUID, url: URL, in folders: inout [FolderItem]) {
+        for i in folders.indices {
+            if folders[i].id == id {
+                folders[i].photos = FolderManager.loadPhotos(from: url)
+                folders[i].children = FolderManager.loadSubfolders(from: url).map { buildFolderTree(url: $0) }
+                return
+            }
+            updateFolder(id: id, url: url, in: &folders[i].children)
+        }
     }
 
     private func buildFolderTree(url: URL) -> FolderItem {

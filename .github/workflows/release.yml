@@ -19,11 +19,22 @@ jobs:
           echo "ARCHIVE_PATH=$RUNNER_TEMP/ExifExtractor.xcarchive" >> $GITHUB_ENV
           echo "EXPORT_PATH=$RUNNER_TEMP/export" >> $GITHUB_ENV
           echo "PKG_DIR=$RUNNER_TEMP" >> $GITHUB_ENV
+          echo "SPARKLE_DIR=$RUNNER_TEMP/Sparkle" >> $GITHUB_ENV
 
       - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_PAT }}
 
       - name: Get version from tag
         run: echo "VERSION=${GITHUB_REF_NAME#v}" >> $GITHUB_ENV
+
+      - name: Download Sparkle tools
+        run: |
+          SPARKLE_VERSION="2.9.3"
+          curl -fsSL "https://github.com/sparkle-project/Sparkle/releases/download/${SPARKLE_VERSION}/Sparkle-${SPARKLE_VERSION}.tar.xz" \
+            -o "$RUNNER_TEMP/Sparkle.tar.xz"
+          mkdir -p "$SPARKLE_DIR"
+          tar -xf "$RUNNER_TEMP/Sparkle.tar.xz" -C "$SPARKLE_DIR"
 
       - name: Import certificates into temporary keychain
         env:
@@ -83,8 +94,6 @@ jobs:
           </plist>
           PLIST
 
-          sed -i '' "s|<string>developer-id</string>|<string>developer-id</string>|" "$RUNNER_TEMP/ExportOptions.plist"
-
           xcodebuild -exportArchive \
             -archivePath "$ARCHIVE_PATH" \
             -exportPath "$EXPORT_PATH" \
@@ -103,6 +112,25 @@ jobs:
             --wait --verbose
 
           xcrun stapler staple "$EXPORT_PATH/ExifExtractor.app"
+
+      - name: Create Sparkle .zip for auto-update
+        env:
+          SPARKLE_PRIVATE_KEY: ${{ secrets.SPARKLE_PRIVATE_KEY }}
+        run: |
+          ZIP_PATH="$RUNNER_TEMP/ExifExtractor-$VERSION.zip"
+          ditto -c -k --keepParent "$EXPORT_PATH/ExifExtractor.app" "$ZIP_PATH"
+
+          SIGN_OUTPUT=$("$SPARKLE_DIR/bin/sign_update" "$ZIP_PATH" --ed-key-file <(echo "$SPARKLE_PRIVATE_KEY"))
+          ED_SIGNATURE=$(echo "$SIGN_OUTPUT" | grep -oP '(?<=sparkle:edSignature=")[^"]+')
+          ZIP_SIZE=$(stat -f%z "$ZIP_PATH")
+          PUB_DATE=$(date -u "+%a, %d %b %Y %H:%M:%S +0000")
+          DOWNLOAD_URL="https://github.com/michimani/exif-extractor-macos/releases/download/v${VERSION}/ExifExtractor-${VERSION}.zip"
+
+          echo "ZIP_PATH=$ZIP_PATH" >> $GITHUB_ENV
+          echo "ED_SIGNATURE=$ED_SIGNATURE" >> $GITHUB_ENV
+          echo "ZIP_SIZE=$ZIP_SIZE" >> $GITHUB_ENV
+          echo "PUB_DATE=$PUB_DATE" >> $GITHUB_ENV
+          echo "DOWNLOAD_URL=$DOWNLOAD_URL" >> $GITHUB_ENV
 
       - name: Create .pkg
         run: |
@@ -136,8 +164,44 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           name: "EXIF Extractor v${{ env.VERSION }}"
-          files: ${{ env.PKG_DIR }}/ExifExtractor-${{ env.VERSION }}.pkg
+          files: |
+            ${{ env.PKG_DIR }}/ExifExtractor-${{ env.VERSION }}.pkg
+            ${{ env.ZIP_PATH }}
           generate_release_notes: true
+
+      - name: Update appcast.xml
+        run: |
+          NEW_ITEM="        <item>
+            <title>Version $VERSION</title>
+            <sparkle:version>$VERSION</sparkle:version>
+            <sparkle:shortVersionString>$VERSION</sparkle:shortVersionString>
+            <pubDate>$PUB_DATE</pubDate>
+            <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url=\"$DOWNLOAD_URL\"
+                sparkle:edSignature=\"$ED_SIGNATURE\"
+                length=\"$ZIP_SIZE\"
+                type=\"application/octet-stream\"/>
+        </item>"
+
+          python3 - <<PYEOF
+import re, os
+
+with open("appcast.xml", "r") as f:
+    content = f.read()
+
+new_item = os.environ["NEW_ITEM"]
+content = content.replace("    </channel>", f"{new_item}\n    </channel>")
+
+with open("appcast.xml", "w") as f:
+    f.write(content)
+PYEOF
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add appcast.xml
+          git commit -m "Update appcast.xml for v$VERSION"
+          git push origin HEAD:main
 
       - name: Clean up keychain
         if: always()

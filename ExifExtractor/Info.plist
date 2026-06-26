@@ -13,7 +13,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>EXIF Extractor</string>
 	<key>CFBundleName</key>
-	<string>$(PRODUCT_NAME)</string>
+	<string>EXIF Extractor</string>
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
@@ -26,5 +26,9 @@
 	<string>Copyright © 2026 michimani. All rights reserved.</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>SUFeedURL</key>
+	<string>https://raw.githubusercontent.com/michimani/exif-extractor-macos/main/appcast.xml</string>
+	<key>SUPublicEDKey</key>
+	<string>kNR5VhbhMNg+t0CDgaiVM4K+AXoiF9b4WNbO06aaRvs=</string>
 </dict>
 </plist>
