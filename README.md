@@ -50,7 +50,7 @@ Select a folder and open the Stats view to see aggregated charts and rankings ac
 
 ## Installation
 
-1. Go to the [Releases](../../releases) page and download the latest `ExifExtractor-<version>.pkg` file.
+1. Go to the [Releases](https://github.com/michimani/exif-extractor-macos/releases) page and download the latest `ExifExtractor-<version>.pkg` file.
 2. Open the downloaded `.pkg` file.
 3. Follow the on-screen installer steps — the app will be installed into `/Applications`.
 4. Launch **EXIF Extractor** from Launchpad or Spotlight.
