@@ -1,0 +1,5 @@
+[tagpr]
+    versionFile = VERSION
+    command = sed -i 's/MARKETING_VERSION = [0-9][0-9.]*;/MARKETING_VERSION = {{.Version}};/g' ExifExtractor.xcodeproj/project.pbxproj
+    tagPrefix = v
+    releaseBranch = main
