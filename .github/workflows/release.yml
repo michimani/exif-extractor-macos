@@ -170,7 +170,8 @@ jobs:
           generate_release_notes: true
 
       - name: Update appcast.xml
-        run: python3 scripts/update_appcast.py
+        run: |
+          python3 scripts/update_appcast.py
 
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
