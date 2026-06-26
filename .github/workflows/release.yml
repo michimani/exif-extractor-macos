@@ -103,7 +103,7 @@ jobs:
       - name: Notarize .app
         run: |
           ditto -c -k --keepParent \
-            "$EXPORT_PATH/ExifExtractor.app" \
+            "$EXPORT_PATH/EXIF Extractor.app" \
             "$RUNNER_TEMP/ExifExtractor-app.zip"
 
           xcrun notarytool submit "$RUNNER_TEMP/ExifExtractor-app.zip" \
@@ -112,14 +112,14 @@ jobs:
             --team-id "${{ secrets.APPLE_TEAM_ID }}" \
             --wait --verbose
 
-          xcrun stapler staple "$EXPORT_PATH/ExifExtractor.app"
+          xcrun stapler staple "$EXPORT_PATH/EXIF Extractor.app"
 
       - name: Create Sparkle .zip for auto-update
         env:
           SPARKLE_PRIVATE_KEY: ${{ secrets.SPARKLE_PRIVATE_KEY }}
         run: |
           ZIP_PATH="$RUNNER_TEMP/ExifExtractor-$VERSION.zip"
-          ditto -c -k --keepParent "$EXPORT_PATH/ExifExtractor.app" "$ZIP_PATH"
+          ditto -c -k --keepParent "$EXPORT_PATH/EXIF Extractor.app" "$ZIP_PATH"
 
           SIGN_OUTPUT=$("$SPARKLE_DIR/bin/sign_update" "$ZIP_PATH" --ed-key-file <(echo "$SPARKLE_PRIVATE_KEY"))
           ED_SIGNATURE=$(echo "$SIGN_OUTPUT" | sed -n 's/.*sparkle:edSignature="\([^"]*\)".*/\1/p')
@@ -136,7 +136,7 @@ jobs:
       - name: Create .pkg
         run: |
           pkgbuild \
-            --component "$EXPORT_PATH/ExifExtractor.app" \
+            --component "$EXPORT_PATH/EXIF Extractor.app" \
             --install-location /Applications \
             --identifier com.michimani.ExifExtractor \
             --version "$VERSION" \
