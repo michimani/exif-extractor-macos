@@ -1,5 +1,9 @@
 # Changelog
 
+## [v0.1.4](https://github.com/michimani/exif-extractor-macos/compare/v/v0.1.3...v/v0.1.4) - 2026-06-26
+
+- fix: pass GH_PAT to actions/checkout so tagpr tag pushes trigger release workflow by @michimani in https://github.com/michimani/exif-extractor-macos/pull/13
+
 ## [v0.1.3](https://github.com/michimani/exif-extractor-macos/compare/v/v0.1.2...v/v0.1.3) - 2026-06-26
 
 - fix: match release workflow trigger to tagpr tag format v/v* by @michimani in https://github.com/michimani/exif-extractor-macos/pull/11
