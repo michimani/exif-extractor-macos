@@ -6,6 +6,21 @@ struct SettingsView: View {
     var body: some View {
         Form {
             Section {
+                Picker("", selection: Binding(
+                    get: { settings.appLanguage },
+                    set: { settings.appLanguage = $0 }
+                )) {
+                    ForEach(AppLanguage.allCases, id: \.self) { lang in
+                        Text(lang.displayName).tag(lang)
+                    }
+                }
+                .pickerStyle(.segmented)
+                .labelsHidden()
+            } header: {
+                Text("settings.language.label")
+            }
+
+            Section {
                 FontSizeStepSlider(selection: Binding(
                     get: { settings.fontSize },
                     set: { settings.fontSize = $0 }

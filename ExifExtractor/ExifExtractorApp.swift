@@ -22,6 +22,8 @@ struct ExifExtractorApp: App {
                 .environmentObject(viewModel)
                 .environmentObject(templateVM)
                 .environmentObject(settings)
+                .environment(\.locale, settings.locale)
+                .environment(\.localizationBundle, settings.bundle)
         }
         .defaultSize(width: 1200, height: 750)
         .commands {
@@ -48,6 +50,8 @@ struct ExifExtractorApp: App {
         Settings {
             SettingsView()
                 .environmentObject(settings)
+                .environment(\.locale, settings.locale)
+                .environment(\.localizationBundle, settings.bundle)
         }
     }
 
@@ -59,7 +63,11 @@ struct ExifExtractorApp: App {
             defer: false
         )
         window.title = String(localized: "help.window.title")
-        window.contentView = NSHostingView(rootView: HelpView())
+        window.contentView = NSHostingView(
+            rootView: HelpView()
+                .environment(\.locale, settings.locale)
+                .environment(\.localizationBundle, settings.bundle)
+        )
         window.center()
         window.makeKeyAndOrderFront(nil)
     }

@@ -1,6 +1,35 @@
 import Foundation
 import SwiftUI
 
+// MARK: - Environment key for language-specific bundle
+
+struct LocalizationBundleKey: EnvironmentKey {
+    static let defaultValue: Bundle = .main
+}
+
+extension EnvironmentValues {
+    var localizationBundle: Bundle {
+        get { self[LocalizationBundleKey.self] }
+        set { self[LocalizationBundleKey.self] = newValue }
+    }
+}
+
+// MARK: - AppLanguage
+
+enum AppLanguage: String, CaseIterable {
+    case japanese = "ja"
+    case english  = "en"
+
+    var displayName: String {
+        switch self {
+        case .japanese: return "日本語"
+        case .english:  return "English"
+        }
+    }
+}
+
+// MARK: - ContentFontSize
+
 enum ContentFontSize: String, CaseIterable {
     case xsmall = "xsmall"
     case small  = "small"
@@ -29,14 +58,27 @@ enum ContentFontSize: String, CaseIterable {
     }
 }
 
+// MARK: - SettingsStore
+
 final class SettingsStore: ObservableObject {
     @AppStorage("contentFontSize") var fontSizeRaw: String = ContentFontSize.medium.rawValue
+    @AppStorage("appLanguage") var appLanguageRaw: String = "ja"
 
     var fontSize: ContentFontSize {
         get { ContentFontSize(rawValue: fontSizeRaw) ?? .medium }
-        set {
-            fontSizeRaw = newValue.rawValue
-            objectWillChange.send()
-        }
+        set { fontSizeRaw = newValue.rawValue }
+    }
+
+    var appLanguage: AppLanguage {
+        get { AppLanguage(rawValue: appLanguageRaw) ?? .japanese }
+        set { appLanguageRaw = newValue.rawValue }
+    }
+
+    var locale: Locale { Locale(identifier: appLanguageRaw) }
+
+    var bundle: Bundle {
+        guard let path = Bundle.main.path(forResource: appLanguageRaw, ofType: "lproj"),
+              let b = Bundle(path: path) else { return .main }
+        return b
     }
 }

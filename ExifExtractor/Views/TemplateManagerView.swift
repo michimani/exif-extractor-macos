@@ -4,6 +4,7 @@ struct TemplateManagerView: View {
     @EnvironmentObject var templateVM: TemplateViewModel
     @EnvironmentObject var appVM: AppViewModel
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.localizationBundle) private var bundle
     @State private var selectedID: UUID?
     @State private var editingTemplate: CopyTemplate?
 
@@ -169,7 +170,7 @@ struct TemplateManagerView: View {
 
             let isEmpty = previewText.isEmpty
             HStack {
-                Text(isEmpty ? String(localized: "template.preview.empty") : previewText)
+                Text(isEmpty ? String(localized: "template.preview.empty", bundle: bundle) : previewText)
                     .font(.callout)
                     .foregroundStyle(isEmpty ? .tertiary : .primary)
                     .frame(maxWidth: .infinity, alignment: .leading)
