@@ -26,7 +26,12 @@ jobs:
           token: ${{ secrets.GH_PAT }}
 
       - name: Get version from tag
-        run: echo "VERSION=${GITHUB_REF_NAME#v/v}" >> $GITHUB_ENV
+        run: |
+          VERSION="${GITHUB_REF_NAME#v/v}"
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          IFS='.' read -r MAJOR MINOR PATCH <<< "$VERSION"
+          BUILD_NUMBER=$((MAJOR * 10000 + MINOR * 100 + PATCH))
+          echo "BUILD_NUMBER=$BUILD_NUMBER" >> $GITHUB_ENV
 
       - name: Download Sparkle tools
         run: |
@@ -76,7 +81,8 @@ jobs:
             CODE_SIGN_IDENTITY="Developer ID Application" \
             DEVELOPMENT_TEAM="${{ secrets.APPLE_TEAM_ID }}" \
             OTHER_CODE_SIGN_FLAGS="--keychain $KEYCHAIN_PATH" \
-            MARKETING_VERSION="$VERSION"
+            MARKETING_VERSION="$VERSION" \
+            CURRENT_PROJECT_VERSION="$BUILD_NUMBER"
 
       - name: Export .app
         run: |

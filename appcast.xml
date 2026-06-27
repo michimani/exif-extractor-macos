@@ -7,7 +7,7 @@
         <language>en</language>
         <item>
             <title>Version 0.1.5</title>
-            <sparkle:version>0.1.5</sparkle:version>
+            <sparkle:version>105</sparkle:version>
             <sparkle:shortVersionString>0.1.5</sparkle:shortVersionString>
             <pubDate>Fri, 26 Jun 2026 11:14:56 +0000</pubDate>
             <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
@@ -19,7 +19,7 @@
         </item>
         <item>
             <title>Version 0.2.0</title>
-            <sparkle:version>0.2.0</sparkle:version>
+            <sparkle:version>200</sparkle:version>
             <sparkle:shortVersionString>0.2.0</sparkle:shortVersionString>
             <pubDate>Fri, 26 Jun 2026 16:32:59 +0000</pubDate>
             <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
@@ -31,7 +31,7 @@
         </item>
         <item>
             <title>Version 0.2.1</title>
-            <sparkle:version>0.2.1</sparkle:version>
+            <sparkle:version>201</sparkle:version>
             <sparkle:shortVersionString>0.2.1</sparkle:shortVersionString>
             <pubDate>Fri, 26 Jun 2026 18:39:26 +0000</pubDate>
             <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
