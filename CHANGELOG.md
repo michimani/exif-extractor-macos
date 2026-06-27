@@ -1,5 +1,9 @@
 # Changelog
 
+## [v0.2.3](https://github.com/michimani/exif-extractor-macos/compare/v/v0.2.2...v/v0.2.3) - 2026-06-27
+
+- fix: correct Sparkle download URL to include v/v prefix by @michimani in https://github.com/michimani/exif-extractor-macos/pull/29
+
 ## [v0.2.2](https://github.com/michimani/exif-extractor-macos/compare/v/v0.2.1...v/v0.2.2) - 2026-06-27
 
 - fix: use natural number for sparkle:version by @michimani in https://github.com/michimani/exif-extractor-macos/pull/27
