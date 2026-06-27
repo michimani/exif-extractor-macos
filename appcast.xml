@@ -12,7 +12,7 @@
             <pubDate>Fri, 26 Jun 2026 11:14:56 +0000</pubDate>
             <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
             <enclosure
-                url="https://github.com/michimani/exif-extractor-macos/releases/download/v0.1.5/ExifExtractor-0.1.5.zip"
+                url="https://github.com/michimani/exif-extractor-macos/releases/download/v/v0.1.5/ExifExtractor-0.1.5.zip"
                 sparkle:edSignature="o43AZTgU8h9HWBhR69Q3xJwBsUHFsa+OiH8AVyV8W0wuZxBkzjPgYHaWrYRtHAdEOk5wFPboQpey28KTKJDqCg=="
                 length="1509026"
                 type="application/octet-stream"/>
@@ -24,7 +24,7 @@
             <pubDate>Fri, 26 Jun 2026 16:32:59 +0000</pubDate>
             <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
             <enclosure
-                url="https://github.com/michimani/exif-extractor-macos/releases/download/v0.2.0/ExifExtractor-0.2.0.zip"
+                url="https://github.com/michimani/exif-extractor-macos/releases/download/v/v0.2.0/ExifExtractor-0.2.0.zip"
                 sparkle:edSignature="uC51tOWqoy6DNT0crAUWYA9Ju10HJr07ZMxuqF8ei4bdtTqeS1kJnkN86PjMCaCITGwKa5RkR1Zi/nWHWgL/Bg=="
                 length="1532775"
                 type="application/octet-stream"/>
@@ -36,7 +36,7 @@
             <pubDate>Fri, 26 Jun 2026 18:39:26 +0000</pubDate>
             <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
             <enclosure
-                url="https://github.com/michimani/exif-extractor-macos/releases/download/v0.2.1/ExifExtractor-0.2.1.zip"
+                url="https://github.com/michimani/exif-extractor-macos/releases/download/v/v0.2.1/ExifExtractor-0.2.1.zip"
                 sparkle:edSignature="cGp7cvUYjc2cU+Wpx5L6mXe6Gpud+bpm5ngXJKGMGAJLPjBWOdTn50qK2rKR10agZVMKaICQ67Vkh8ISzGM+Bg=="
                 length="1545561"
                 type="application/octet-stream"/>
@@ -48,7 +48,7 @@
             <pubDate>Sat, 27 Jun 2026 16:03:03 +0000</pubDate>
             <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
             <enclosure
-                url="https://github.com/michimani/exif-extractor-macos/releases/download/v0.2.2/ExifExtractor-0.2.2.zip"
+                url="https://github.com/michimani/exif-extractor-macos/releases/download/v/v0.2.2/ExifExtractor-0.2.2.zip"
                 sparkle:edSignature="u/MmkHJPkHUPQNJAY7RXcJZ6Y3XTvDybi/EW8SbQnm8YwmrDaDlZPBLvP7C5lTYhpcrtpwREGtZRROUrEz5WCw=="
                 length="1545571"
                 type="application/octet-stream"/>

@@ -131,7 +131,7 @@ jobs:
           ED_SIGNATURE=$(echo "$SIGN_OUTPUT" | sed -n 's/.*sparkle:edSignature="\([^"]*\)".*/\1/p')
           ZIP_SIZE=$(stat -f%z "$ZIP_PATH")
           PUB_DATE=$(date -u "+%a, %d %b %Y %H:%M:%S +0000")
-          DOWNLOAD_URL="https://github.com/michimani/exif-extractor-macos/releases/download/v${VERSION}/ExifExtractor-${VERSION}.zip"
+          DOWNLOAD_URL="https://github.com/michimani/exif-extractor-macos/releases/download/${GITHUB_REF_NAME}/ExifExtractor-${VERSION}.zip"
 
           echo "ZIP_PATH=$ZIP_PATH" >> $GITHUB_ENV
           echo "ED_SIGNATURE=$ED_SIGNATURE" >> $GITHUB_ENV
