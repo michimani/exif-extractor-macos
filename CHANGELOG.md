@@ -1,5 +1,9 @@
 # Changelog
 
+## [v0.2.2](https://github.com/michimani/exif-extractor-macos/compare/v/v0.2.1...v/v0.2.2) - 2026-06-27
+
+- fix: use natural number for sparkle:version by @michimani in https://github.com/michimani/exif-extractor-macos/pull/27
+
 ## [v0.2.1](https://github.com/michimani/exif-extractor-macos/compare/v/v0.2.0...v/v0.2.1) - 2026-06-26
 
 - fix: remove generate_release_notes to prevent duplicate release description by @michimani in https://github.com/michimani/exif-extractor-macos/pull/23
