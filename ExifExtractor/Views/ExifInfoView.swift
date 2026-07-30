@@ -98,6 +98,7 @@ struct ExifInfoView: View {
             Image(systemName: "info.circle")
                 .font(.system(size: 36))
                 .foregroundStyle(.tertiary)
+                .accessibilityHidden(true)
             Text("exif.empty.message")
                 .font(.callout)
                 .multilineTextAlignment(.center)
@@ -148,10 +149,15 @@ struct ExifRow: View {
     @State private var isCopied = false
     @EnvironmentObject var settings: SettingsStore
     @Environment(\.localizationBundle) private var bundle
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
+    private var localizedLabel: String {
+        bundle.localizedString(forKey: label, value: label, table: nil)
+    }
 
     var body: some View {
         HStack(alignment: .top, spacing: 8) {
-            Text(verbatim: bundle.localizedString(forKey: label, value: label, table: nil))
+            Text(verbatim: localizedLabel)
                 .font(.system(size: settings.fontSize.pointSize - 2))
                 .foregroundStyle(.secondary)
                 .frame(width: 96, alignment: .leading)
@@ -162,32 +168,54 @@ struct ExifRow: View {
                 .fontWeight(.medium)
                 .lineLimit(3)
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .textSelection(.enabled)
 
-            Button(action: copyValue) {
-                Image(systemName: isCopied ? "checkmark" : "doc.on.doc")
-                    .font(.caption2)
-                    .foregroundStyle(isCopied ? Color.green : Color.secondary)
-                    .frame(width: 16)
-            }
-            .buttonStyle(.plain)
-            .help("action.copy")
+            CopyButton(isCopied: isCopied, accessibilityLabel: copyActionLabel, action: copyValue)
         }
         .padding(.horizontal, 10)
         .padding(.vertical, 7)
         .overlay(alignment: .bottom) {
             Divider().padding(.leading, 10)
         }
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel("\(localizedLabel): \(value)")
+    }
+
+    private var copyActionLabel: String {
+        String(format: bundle.localizedString(forKey: "action.copy.field", value: "%@", table: nil),
+               localizedLabel)
     }
 
     private func copyValue() {
         NSPasteboard.general.clearContents()
         NSPasteboard.general.setString(value, forType: .string)
-        withAnimation(.easeInOut(duration: 0.2)) { isCopied = true }
+        withAnimation(reduceMotion ? nil : .easeInOut(duration: 0.2)) { isCopied = true }
         Task {
             try? await Task.sleep(for: .seconds(1.5))
             await MainActor.run {
-                withAnimation(.easeInOut(duration: 0.2)) { isCopied = false }
+                withAnimation(reduceMotion ? nil : .easeInOut(duration: 0.2)) { isCopied = false }
             }
         }
+    }
+}
+
+/// Shared copy control. Sized to stay within reach of the platform's minimum
+/// control size, and labeled so it isn't an anonymous glyph to VoiceOver.
+struct CopyButton: View {
+    let isCopied: Bool
+    let accessibilityLabel: String
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            Image(systemName: isCopied ? "checkmark" : "doc.on.doc")
+                .font(.caption)
+                .foregroundStyle(isCopied ? Color.green : Color.secondary)
+                .frame(width: 22, height: 22)
+                .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(accessibilityLabel)
+        .help(accessibilityLabel)
     }
 }

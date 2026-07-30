@@ -117,8 +117,8 @@
     },
     "help.feature.reload.desc" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Click the reload button in the folder panel header, or right-click a folder, to sync added or deleted photos." } },
-        "ja" : { "stringUnit" : { "state" : "translated", "value" : "フォルダパネルのヘッダーにある再読み込みボタン、またはフォルダを右クリックして、追加・削除された写真を同期します。" } }
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Use the reload button in the toolbar (⌘R), or right-click a folder, to sync added or deleted photos." } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "ツールバーの再読み込みボタン（⌘R）、またはフォルダを右クリックして、追加・削除された写真を同期します。" } }
       }
     },
     "help.feature.viewer.title" : {
@@ -129,8 +129,8 @@
     },
     "help.feature.viewer.desc" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Select a photo from the thumbnail strip at the bottom, or use the left/right arrow keys to navigate." } },
-        "ja" : { "stringUnit" : { "state" : "translated", "value" : "下部のサムネイルから写真を選択するか、左右の矢印キーで切り替えます。" } }
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Select a photo from the thumbnail strip at the bottom, or use the left/right arrow keys or the Photo menu to navigate." } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "下部のサムネイルから写真を選択するか、左右の矢印キー（または「写真」メニュー）で切り替えます。" } }
       }
     },
     "help.feature.exif.title" : {
@@ -153,8 +153,8 @@
     },
     "help.feature.template.desc" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Create custom templates to copy EXIF info in a specific format. Use placeholders like {camera}, {lens}, {iso}." } },
-        "ja" : { "stringUnit" : { "state" : "translated", "value" : "EXIF情報を任意のフォーマットでコピーするテンプレートを作成できます。{camera}、{lens}、{iso} などのプレースホルダーを使用します。" } }
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Create custom templates to copy EXIF info in a specific format. Use placeholders like {camera}, {lens}, {iso}. Also available from the EXIF Extractor menu." } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "EXIF情報を任意のフォーマットでコピーするテンプレートを作成できます。{camera}、{lens}、{iso} などのプレースホルダーを使用します。「EXIF Extractor」メニューからも開けます。" } }
       }
     },
     "help.feature.stats.title" : {
@@ -165,8 +165,8 @@
     },
     "help.feature.stats.desc" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Click the chart icon in the folder panel to view shooting statistics such as focal length, aperture, ISO, and shutter speed distributions." } },
-        "ja" : { "stringUnit" : { "state" : "translated", "value" : "フォルダパネルのグラフアイコンをクリックして、焦点距離・絞り・ISO・シャッタースピードなどの撮影統計を表示します。" } }
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Use the chart icon in the toolbar, or the Photo menu, to view shooting statistics such as focal length, aperture, ISO, and shutter speed distributions." } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "ツールバーのグラフアイコン、または「写真」メニューから、焦点距離・絞り・ISO・シャッタースピードなどの撮影統計を表示します。" } }
       }
     },
     "help.feature.update.title" : {
@@ -177,15 +177,15 @@
     },
     "help.feature.update.desc" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "The app checks for updates on launch. You can also check manually from EXIF Extractor → Check for Updates..." } },
-        "ja" : { "stringUnit" : { "state" : "translated", "value" : "起動時に自動でアップデートを確認します。「EXIF Extractor」メニュー →「アップデートを確認...」から手動確認もできます。" } }
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "The app checks for updates on launch. You can also check manually from EXIF Extractor → Check for Updates…" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "起動時に自動でアップデートを確認します。「EXIF Extractor」メニュー →「アップデートを確認…」から手動確認もできます。" } }
       }
     },
 
     "updater.check.menu" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Check for Updates..." } },
-        "ja" : { "stringUnit" : { "state" : "translated", "value" : "アップデートを確認..." } }
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Check for Updates…" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "アップデートを確認…" } }
       }
     },
 
@@ -642,13 +642,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add Folder..."
+            "value" : "Add Folder…"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "フォルダを追加..."
+            "value" : "フォルダを追加…"
           }
         }
       }
@@ -771,13 +771,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Select Folder"
+            "value" : "Select Folder…"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "フォルダを選択"
+            "value" : "フォルダを選択…"
           }
         }
       }
@@ -1623,13 +1623,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Manage Templates..."
+            "value" : "Manage Templates…"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "テンプレートを管理..."
+            "value" : "テンプレートを管理…"
           }
         }
       }
@@ -1758,6 +1758,297 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "フィットサイズにリセット"
+          }
+        }
+      }
+    },
+    "menu.photo" : {
+      "comment" : "Title of the app-specific menu in the menu bar.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Photo"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "写真"
+          }
+        }
+      }
+    },
+    "menu.photo.previous" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Previous Photo"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "前の写真"
+          }
+        }
+      }
+    },
+    "menu.photo.next" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Next Photo"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "次の写真"
+          }
+        }
+      }
+    },
+    "menu.view.zoomIn" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zoom In"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "拡大"
+          }
+        }
+      }
+    },
+    "menu.view.zoomOut" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zoom Out"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "縮小"
+          }
+        }
+      }
+    },
+    "menu.view.actualSize" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Actual Size"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "実際のサイズ"
+          }
+        }
+      }
+    },
+    "menu.view.showInspector" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show EXIF Info"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "EXIF情報を表示"
+          }
+        }
+      }
+    },
+    "menu.view.hideInspector" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hide EXIF Info"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "EXIF情報を隠す"
+          }
+        }
+      }
+    },
+    "menu.stats.open" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show Shooting Statistics…"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "撮影統計を表示…"
+          }
+        }
+      }
+    },
+    "toolbar.inspector.toggle" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show or hide EXIF info"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "EXIF情報の表示を切り替え"
+          }
+        }
+      }
+    },
+    "folder.panel.open.message" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose a folder to add"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "追加するフォルダを選択してください"
+          }
+        }
+      }
+    },
+    "folder.panel.open.prompt" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "追加"
+          }
+        }
+      }
+    },
+    "action.copy.field" : {
+      "comment" : "Accessibility label and tooltip of a per-field copy button. %@ is the field name.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copy %@"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@をコピー"
+          }
+        }
+      }
+    },
+    "viewer.zoom.level" : {
+      "comment" : "Accessibility label of the zoom percentage readout.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zoom level %d%%"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "拡大率 %d%%"
+          }
+        }
+      }
+    },
+    "help.shortcut.reload" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reload folder"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "フォルダを再読み込み"
+          }
+        }
+      }
+    },
+    "help.shortcut.zoom" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zoom photo in / out"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "写真を拡大 / 縮小"
+          }
+        }
+      }
+    },
+    "help.shortcut.actualSize" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reset to actual size"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "実際のサイズに戻す"
+          }
+        }
+      }
+    },
+    "help.shortcut.inspector" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show or hide EXIF info"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "EXIF情報の表示を切り替え"
           }
         }
       }

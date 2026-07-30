@@ -19,8 +19,8 @@ final class AppViewModel: ObservableObject {
         panel.canChooseFiles = false
         panel.canChooseDirectories = true
         panel.allowsMultipleSelection = false
-        panel.message = "フォルダを選択してください"
-        panel.prompt = "追加"
+        panel.message = String(localized: "folder.panel.open.message")
+        panel.prompt = String(localized: "folder.panel.open.prompt")
 
         guard panel.runModal() == .OK, let url = panel.url else { return }
         let folder = buildFolderTree(url: url)

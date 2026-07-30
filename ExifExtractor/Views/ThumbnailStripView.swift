@@ -3,13 +3,15 @@ import ImageIO
 
 struct ThumbnailStripView: View {
     @EnvironmentObject var viewModel: AppViewModel
+    @Environment(\.localizationBundle) private var bundle
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var body: some View {
         Group {
             if viewModel.currentPhotos.isEmpty {
                 HStack {
                     Spacer()
-                    Text("thumbnail.empty.message")
+                    Text("thumbnail.empty.message", bundle: bundle)
                         .font(.caption)
                         .foregroundStyle(.secondary)
                     Spacer()
@@ -23,10 +25,10 @@ struct ThumbnailStripView: View {
                             ForEach(viewModel.currentPhotos) { photo in
                                 ThumbnailCell(
                                     photo: photo,
-                                    isSelected: viewModel.selectedPhoto?.id == photo.id
+                                    isSelected: viewModel.selectedPhoto?.id == photo.id,
+                                    onSelect: { viewModel.selectPhoto(photo) }
                                 )
                                 .id(photo.id)
-                                .onTapGesture { viewModel.selectPhoto(photo) }
                             }
                         }
                         .padding(.horizontal, 8)
@@ -36,8 +38,12 @@ struct ThumbnailStripView: View {
                     .background(Color(NSColor.controlBackgroundColor))
                     .onChange(of: viewModel.selectedPhoto) { _, photo in
                         guard let id = photo?.id else { return }
-                        withAnimation(.easeInOut(duration: 0.2)) {
+                        if reduceMotion {
                             proxy.scrollTo(id, anchor: .center)
+                        } else {
+                            withAnimation(.easeInOut(duration: 0.2)) {
+                                proxy.scrollTo(id, anchor: .center)
+                            }
                         }
                     }
                     .onAppear {
@@ -54,36 +60,45 @@ struct ThumbnailStripView: View {
 private struct ThumbnailCell: View {
     let photo: PhotoItem
     let isSelected: Bool
+    let onSelect: () -> Void
     @State private var thumbnail: NSImage?
 
     var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 5)
-                .fill(isSelected ? Color.accentColor.opacity(0.25) : Color.clear)
-
-            if let thumb = thumbnail {
-                Image(nsImage: thumb)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 74, height: 74)
-                    .clipShape(RoundedRectangle(cornerRadius: 4))
-            } else {
-                RoundedRectangle(cornerRadius: 4)
-                    .fill(Color.secondary.opacity(0.15))
-                    .frame(width: 74, height: 74)
-                    .overlay {
-                        Image(systemName: "photo")
-                            .font(.caption)
-                            .foregroundStyle(.tertiary)
-                    }
-            }
-
-            if isSelected {
+        // A real button rather than a tap gesture, so the cell gets a press
+        // state, keyboard activation, and a VoiceOver action.
+        Button(action: onSelect) {
+            ZStack {
                 RoundedRectangle(cornerRadius: 5)
-                    .strokeBorder(Color.accentColor, lineWidth: 2)
+                    .fill(isSelected ? Color.accentColor.opacity(0.25) : Color.clear)
+
+                if let thumb = thumbnail {
+                    Image(nsImage: thumb)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 74, height: 74)
+                        .clipShape(RoundedRectangle(cornerRadius: 4))
+                } else {
+                    RoundedRectangle(cornerRadius: 4)
+                        .fill(Color.secondary.opacity(0.15))
+                        .frame(width: 74, height: 74)
+                        .overlay {
+                            Image(systemName: "photo")
+                                .font(.caption)
+                                .foregroundStyle(.tertiary)
+                        }
+                }
+
+                if isSelected {
+                    RoundedRectangle(cornerRadius: 5)
+                        .strokeBorder(Color.accentColor, lineWidth: 2)
+                }
             }
+            .frame(width: 78, height: 78)
+            .contentShape(Rectangle())
         }
-        .frame(width: 78, height: 78)
+        .buttonStyle(.plain)
+        .accessibilityLabel(photo.fileName)
+        .accessibilityAddTraits(isSelected ? [.isButton, .isSelected] : .isButton)
         .task { await loadThumbnail() }
     }
 

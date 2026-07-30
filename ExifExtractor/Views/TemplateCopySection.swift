@@ -3,9 +3,9 @@ import SwiftUI
 struct TemplateCopySection: View {
     @EnvironmentObject var templateVM: TemplateViewModel
     @EnvironmentObject var settings: SettingsStore
+    @EnvironmentObject var ui: UIState
     @Environment(\.localizationBundle) private var bundle
     let photo: PhotoItem
-    @State private var showManager = false
     @State private var copiedID: UUID?
 
     var body: some View {
@@ -31,7 +31,7 @@ struct TemplateCopySection: View {
             }
 
             Button {
-                showManager = true
+                ui.showTemplateManager = true
             } label: {
                 HStack {
                     Image(systemName: "slider.horizontal.3")
@@ -39,14 +39,12 @@ struct TemplateCopySection: View {
                 }
                 .font(.system(size: settings.fontSize.pointSize - 2))
                 .foregroundStyle(Color.accentColor)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, 10)
+                .padding(.vertical, 8)
+                .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
-            .padding(.horizontal, 10)
-            .padding(.vertical, 8)
-        }
-        .sheet(isPresented: $showManager) {
-            TemplateManagerView()
-                .environmentObject(templateVM)
         }
     }
 
@@ -74,6 +72,11 @@ private struct TemplateCopyRow: View {
         TemplateRenderer.render(template: template, photo: photo)
     }
 
+    private var copyActionLabel: String {
+        String(format: bundle.localizedString(forKey: "template.copy.tooltip", value: "%@", table: nil),
+               template.name)
+    }
+
     var body: some View {
         HStack(alignment: .top, spacing: 8) {
             VStack(alignment: .leading, spacing: 2) {
@@ -86,14 +89,7 @@ private struct TemplateCopyRow: View {
                     .lineLimit(2)
             }
             Spacer()
-            Button(action: onCopy) {
-                Image(systemName: isCopied ? "checkmark" : "doc.on.doc")
-                    .font(.caption2)
-                    .foregroundStyle(isCopied ? Color.green : Color.secondary)
-                    .frame(width: 16)
-            }
-            .buttonStyle(.plain)
-            .help(Text(String(format: String(localized: "template.copy.tooltip", bundle: bundle), template.name)))
+            CopyButton(isCopied: isCopied, accessibilityLabel: copyActionLabel, action: onCopy)
         }
         .padding(.horizontal, 10)
         .padding(.vertical, 7)

@@ -2,12 +2,18 @@ import SwiftUI
 
 struct PhotoViewerView: View {
     @EnvironmentObject var viewModel: AppViewModel
+    @EnvironmentObject var ui: UIState
+    @Environment(\.localizationBundle) private var bundle
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var displayImage: NSImage?
     @State private var scale: CGFloat = 1.0
     @State private var lastScale: CGFloat = 1.0
     @State private var offset: CGSize = .zero
     @State private var lastOffset: CGSize = .zero
     @State private var isLoading = false
+
+    private let minScale: CGFloat = 0.1
+    private let maxScale: CGFloat = 10.0
 
     var body: some View {
         ZStack {
@@ -26,6 +32,10 @@ struct PhotoViewerView: View {
             resetTransform()
             loadImage(from: photo?.url)
         }
+        .onChange(of: ui.zoomRequest) { _, request in
+            guard let request else { return }
+            perform(request.action)
+        }
         .onAppear {
             loadImage(from: viewModel.selectedPhoto?.url)
         }
@@ -38,10 +48,11 @@ struct PhotoViewerView: View {
                 .aspectRatio(contentMode: .fit)
                 .scaleEffect(scale)
                 .offset(offset)
+                .accessibilityLabel(viewModel.selectedPhoto?.fileName ?? "")
                 .gesture(
                     MagnifyGesture()
                         .onChanged { value in
-                            scale = max(0.1, min(lastScale * value.magnification, 10.0))
+                            scale = clamped(lastScale * value.magnification)
                         }
                         .onEnded { _ in
                             lastScale = scale
@@ -60,7 +71,7 @@ struct PhotoViewerView: View {
                         }
                 )
                 .onTapGesture(count: 2) {
-                    withAnimation(.spring(response: 0.3)) {
+                    withAnimation(motion(.spring(response: 0.3))) {
                         resetTransform()
                     }
                 }
@@ -74,34 +85,58 @@ struct PhotoViewerView: View {
     }
 
     private var zoomControls: some View {
-        HStack(spacing: 4) {
-            Button(action: zoomOut) {
-                Image(systemName: "minus.magnifyingglass")
-            }
-            .buttonStyle(.plain)
+        HStack(spacing: 2) {
+            zoomButton(
+                systemImage: "minus.magnifyingglass",
+                labelKey: "menu.view.zoomOut",
+                action: { perform(.zoomOut) }
+            )
+            .disabled(scale <= minScale)
 
             Text("\(Int(scale * 100))%")
                 .font(.caption.monospacedDigit())
                 .frame(width: 44, alignment: .center)
+                .accessibilityLabel(zoomLevelLabel)
 
-            Button(action: zoomIn) {
-                Image(systemName: "plus.magnifyingglass")
-            }
-            .buttonStyle(.plain)
+            zoomButton(
+                systemImage: "plus.magnifyingglass",
+                labelKey: "menu.view.zoomIn",
+                action: { perform(.zoomIn) }
+            )
+            .disabled(scale >= maxScale)
 
             Divider()
                 .frame(height: 12)
                 .padding(.horizontal, 2)
 
-            Button(action: { withAnimation(.spring(response: 0.3)) { resetTransform() } }) {
-                Image(systemName: "arrow.up.left.and.down.right.magnifyingglass")
-            }
-            .buttonStyle(.plain)
-            .help("viewer.zoom.reset.tooltip")
+            zoomButton(
+                systemImage: "arrow.up.left.and.down.right.magnifyingglass",
+                labelKey: "viewer.zoom.reset.tooltip",
+                action: { perform(.actualSize) }
+            )
         }
-        .padding(.horizontal, 12)
-        .padding(.vertical, 7)
+        .padding(.horizontal, 8)
+        .padding(.vertical, 4)
         .background(.ultraThinMaterial, in: Capsule())
+    }
+
+    /// Icon-only controls still need a click target people can reliably hit and a
+    /// label VoiceOver can read; the symbol alone provides neither.
+    private func zoomButton(systemImage: String, labelKey: String, action: @escaping () -> Void) -> some View {
+        let label = bundle.localizedString(forKey: labelKey, value: labelKey, table: nil)
+        return Button(action: action) {
+            Image(systemName: systemImage)
+                .frame(width: 24, height: 24)
+                .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(label)
+        .help(label)
+    }
+
+    private var zoomLevelLabel: String {
+        String(format: bundle.localizedString(forKey: "viewer.zoom.level", value: "%d%%", table: nil),
+               Int(scale * 100))
     }
 
     private var emptyState: some View {
@@ -109,24 +144,36 @@ struct PhotoViewerView: View {
             Image(systemName: "photo.on.rectangle.angled")
                 .font(.system(size: 52))
                 .foregroundStyle(.tertiary)
-            Text("viewer.empty.message")
+                .accessibilityHidden(true)
+            Text("viewer.empty.message", bundle: bundle)
                 .font(.callout)
                 .foregroundStyle(.secondary)
         }
     }
 
-    private func zoomIn() {
-        withAnimation(.easeOut(duration: 0.15)) {
-            scale = min(scale * 1.5, 10.0)
-            lastScale = scale
+    // MARK: - Zoom
+
+    private func perform(_ action: UIState.ZoomAction) {
+        switch action {
+        case .zoomIn:
+            withAnimation(motion(.easeOut(duration: 0.15))) {
+                scale = clamped(scale * 1.5)
+                lastScale = scale
+            }
+        case .zoomOut:
+            withAnimation(motion(.easeOut(duration: 0.15))) {
+                scale = clamped(scale / 1.5)
+                lastScale = scale
+            }
+        case .actualSize:
+            withAnimation(motion(.spring(response: 0.3))) {
+                resetTransform()
+            }
         }
     }
 
-    private func zoomOut() {
-        withAnimation(.easeOut(duration: 0.15)) {
-            scale = max(scale / 1.5, 0.1)
-            lastScale = scale
-        }
+    private func clamped(_ value: CGFloat) -> CGFloat {
+        max(minScale, min(value, maxScale))
     }
 
     private func resetTransform() {
@@ -134,6 +181,11 @@ struct PhotoViewerView: View {
         lastScale = 1.0
         offset = .zero
         lastOffset = .zero
+    }
+
+    /// Honors the Reduce Motion accessibility setting.
+    private func motion(_ animation: Animation) -> Animation? {
+        reduceMotion ? nil : animation
     }
 
     private func loadImage(from url: URL?) {
