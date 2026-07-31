@@ -7,7 +7,11 @@ struct HelpView: View {
                 helpSection("help.section.shortcuts") {
                     shortcutRow("⌘ ,",        label: "help.shortcut.preferences")
                     shortcutRow("⌘ ⇧ O",      label: "help.shortcut.addFolder")
+                    shortcutRow("⌘ R",        label: "help.shortcut.reload")
                     shortcutRow("← / →",      label: "help.shortcut.navigate")
+                    shortcutRow("⌘ + / ⌘ −",  label: "help.shortcut.zoom")
+                    shortcutRow("⌘ 0",        label: "help.shortcut.actualSize")
+                    shortcutRow("⌥ ⌘ I",      label: "help.shortcut.inspector")
                 }
 
                 helpSection("help.section.features") {
@@ -22,7 +26,7 @@ struct HelpView: View {
             }
             .padding(24)
         }
-        .frame(width: 520, height: 540)
+        .frame(width: 520, height: 560)
     }
 
     private func helpSection<Content: View>(_ titleKey: LocalizedStringKey, @ViewBuilder content: () -> Content) -> some View {
@@ -56,6 +60,7 @@ struct HelpView: View {
         .padding(.horizontal, 12)
         .padding(.vertical, 9)
         .overlay(alignment: .bottom) { Divider().padding(.leading, 12) }
+        .accessibilityElement(children: .combine)
     }
 
     private func featureRow(icon: String, title: LocalizedStringKey, desc: LocalizedStringKey) -> some View {
@@ -64,6 +69,7 @@ struct HelpView: View {
                 .frame(width: 20)
                 .foregroundStyle(Color.accentColor)
                 .padding(.top, 1)
+                .accessibilityHidden(true)
             VStack(alignment: .leading, spacing: 2) {
                 Text(title)
                     .fontWeight(.medium)
@@ -76,5 +82,6 @@ struct HelpView: View {
         .padding(.horizontal, 12)
         .padding(.vertical, 9)
         .overlay(alignment: .bottom) { Divider().padding(.leading, 44) }
+        .accessibilityElement(children: .combine)
     }
 }

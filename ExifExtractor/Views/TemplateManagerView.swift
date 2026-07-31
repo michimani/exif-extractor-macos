@@ -9,21 +9,26 @@ struct TemplateManagerView: View {
     @State private var editingTemplate: CopyTemplate?
 
     var body: some View {
-        HSplitView {
-            templateList
-            if let template = editingTemplate {
-                templateEditor(template: template)
-            } else {
-                emptyEditor
+        // NavigationStack so the sheet actually renders its title — a sheet
+        // without one gives people nothing to confirm where they are.
+        NavigationStack {
+            HSplitView {
+                templateList
+                if let template = editingTemplate {
+                    templateEditor(template: template)
+                } else {
+                    emptyEditor
+                }
             }
-        }
-        .frame(minWidth: 680, minHeight: 460)
-        .toolbar {
-            ToolbarItem(placement: .confirmationAction) {
-                Button { dismiss() } label: { Text("action.done", bundle: bundle) }
+            .frame(minWidth: 680, minHeight: 460)
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction) {
+                    Button { dismiss() } label: { Text("action.done", bundle: bundle) }
+                        .keyboardShortcut(.defaultAction)
+                }
             }
+            .navigationTitle(Text("template.manager.title", bundle: bundle))
         }
-        .navigationTitle(Text("template.manager.title", bundle: bundle))
         .onChange(of: selectedID) { _, id in
             editingTemplate = templateVM.templates.first { $0.id == id }
         }
@@ -63,29 +68,19 @@ struct TemplateManagerView: View {
             VStack(spacing: 0) {
                 Divider()
                 HStack(spacing: 0) {
-                    Button {
+                    listActionButton(systemImage: "plus", labelKey: "template.add.tooltip") {
                         templateVM.add()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                             selectedID = templateVM.templates.last?.id
                         }
-                    } label: {
-                        Image(systemName: "plus")
-                            .frame(width: 28, height: 28)
                     }
-                    .buttonStyle(.plain)
-                    .help("template.add.tooltip")
 
-                    Button {
+                    listActionButton(systemImage: "minus", labelKey: "template.delete.tooltip") {
                         guard let id = selectedID,
                               let index = templateVM.templates.firstIndex(where: { $0.id == id }) else { return }
                         templateVM.delete(at: IndexSet(integer: index))
-                    } label: {
-                        Image(systemName: "minus")
-                            .frame(width: 28, height: 28)
                     }
-                    .buttonStyle(.plain)
                     .disabled(selectedID == nil)
-                    .help("template.delete.tooltip")
 
                     Spacer()
                 }
@@ -95,6 +90,24 @@ struct TemplateManagerView: View {
             }
         }
         .frame(minWidth: 200, idealWidth: 220, maxWidth: 260)
+    }
+
+    /// Add/remove controls for the list beneath it. Symbol-only, so they carry an
+    /// explicit label, and sized to remain comfortably clickable.
+    private func listActionButton(
+        systemImage: String,
+        labelKey: String,
+        action: @escaping () -> Void
+    ) -> some View {
+        let label = bundle.localizedString(forKey: labelKey, value: labelKey, table: nil)
+        return Button(action: action) {
+            Image(systemName: systemImage)
+                .frame(width: 28, height: 28)
+                .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(label)
+        .help(label)
     }
 
     private func templateEditor(template: CopyTemplate) -> some View {
@@ -177,15 +190,13 @@ struct TemplateManagerView: View {
                     .textSelection(.enabled)
 
                 if !isEmpty {
-                    Button {
+                    CopyButton(
+                        isCopied: false,
+                        accessibilityLabel: bundle.localizedString(forKey: "action.copy", value: "Copy", table: nil)
+                    ) {
                         NSPasteboard.general.clearContents()
                         NSPasteboard.general.setString(previewText, forType: .string)
-                    } label: {
-                        Image(systemName: "doc.on.doc")
-                            .font(.caption)
                     }
-                    .buttonStyle(.plain)
-                    .help("action.copy")
                 }
             }
             .padding(10)
@@ -259,6 +270,10 @@ private struct PlaceholderRow: View {
     let onInsert: () -> Void
     @Environment(\.localizationBundle) private var bundle
 
+    private var insertActionLabel: String {
+        bundle.localizedString(forKey: "template.placeholder.insert.tooltip", value: "Add to format", table: nil)
+    }
+
     var body: some View {
         HStack(spacing: 10) {
             Text(placeholder.placeholder)
@@ -283,9 +298,12 @@ private struct PlaceholderRow: View {
                 Image(systemName: "plus.circle")
                     .font(.caption)
                     .foregroundStyle(Color.accentColor)
+                    .frame(width: 22, height: 22)
+                    .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
-            .help("template.placeholder.insert.tooltip")
+            .accessibilityLabel(insertActionLabel)
+            .help(insertActionLabel)
         }
         .padding(.horizontal, 10)
         .padding(.vertical, 6)

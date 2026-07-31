@@ -3,55 +3,9 @@ import SwiftUI
 struct FolderTreeView: View {
     @EnvironmentObject var viewModel: AppViewModel
     @Environment(\.localizationBundle) private var bundle
-    @State private var showStats = false
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            HStack {
-                Text("folder.panel.title", bundle: bundle)
-                    .font(.subheadline)
-                    .fontWeight(.semibold)
-                    .foregroundStyle(.secondary)
-                Spacer()
-                Button {
-                    showStats = true
-                } label: {
-                    Image(systemName: "chart.bar")
-                        .font(.system(size: 12, weight: .medium))
-                }
-                .buttonStyle(.plain)
-                .disabled(viewModel.currentPhotos.isEmpty)
-                .help("folder.stats.tooltip")
-
-                Button {
-                    viewModel.reloadSelectedFolder()
-                } label: {
-                    Image(systemName: "arrow.clockwise")
-                        .font(.system(size: 12, weight: .medium))
-                }
-                .buttonStyle(.plain)
-                .disabled(viewModel.selectedFolderID == nil)
-                .help("folder.reload.tooltip")
-
-                Button {
-                    viewModel.addFolder()
-                } label: {
-                    Image(systemName: "plus")
-                        .font(.system(size: 12, weight: .medium))
-                }
-                .buttonStyle(.plain)
-                .help("folder.add.tooltip")
-            }
-            .padding(.horizontal, 12)
-            .padding(.vertical, 10)
-            .sheet(isPresented: $showStats) {
-                if let name = viewModel.selectedFolderName {
-                    StatsView(folderName: name, photos: viewModel.currentPhotos)
-                }
-            }
-
-            Divider()
-
+        Group {
             if viewModel.folders.isEmpty {
                 emptyState
             } else {
@@ -79,6 +33,7 @@ struct FolderTreeView: View {
                         }
                 }
                 .listStyle(.sidebar)
+                .accessibilityLabel(Text("folder.panel.title", bundle: bundle))
             }
         }
     }
@@ -88,9 +43,12 @@ struct FolderTreeView: View {
             Image(systemName: "folder.badge.plus")
                 .font(.system(size: 40))
                 .foregroundStyle(.tertiary)
+                .accessibilityHidden(true)
             Text("folder.empty.message", bundle: bundle)
                 .font(.caption)
                 .foregroundStyle(.secondary)
+            // Trailing ellipsis: choosing this opens a separate view where
+            // people supply more input.
             Button { viewModel.addFolder() } label: {
                 Text("folder.select.button", bundle: bundle)
             }
@@ -106,12 +64,17 @@ private struct FolderRow: View {
     let folder: FolderItem
     @Environment(\.localizationBundle) var bundle
 
+    private var photoCountText: String {
+        String(format: bundle.localizedString(forKey: "folder.photo.count", value: "%d", table: nil),
+               folder.photos.count)
+    }
+
     var body: some View {
         Label {
             VStack(alignment: .leading, spacing: 1) {
                 Text(folder.name)
                     .lineLimit(1)
-                Text(String(format: String(localized: "folder.photo.count", bundle: bundle), folder.photos.count))
+                Text(photoCountText)
                     .font(.caption2)
                     .foregroundStyle(.tertiary)
             }
@@ -119,5 +82,7 @@ private struct FolderRow: View {
             Image(systemName: "folder")
                 .foregroundStyle(Color.accentColor)
         }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("\(folder.name), \(photoCountText)")
     }
 }
