@@ -53,5 +53,17 @@
                 length="1545571"
                 type="application/octet-stream"/>
         </item>
+        <item>
+            <title>Version 0.3.0</title>
+            <sparkle:version>300</sparkle:version>
+            <sparkle:shortVersionString>0.3.0</sparkle:shortVersionString>
+            <pubDate>Fri, 31 Jul 2026 14:38:42 +0000</pubDate>
+            <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
+            <enclosure
+                url="https://github.com/michimani/exif-extractor-macos/releases/download/v/v0.3.0/ExifExtractor-0.3.0.zip"
+                sparkle:edSignature="R10ZYHnSjlAtR1FEXGx6Vc6BMKa7iC3acK6M1Z7QIOH96MEPO0pmMjcjmCJS1XQUw0cnRQ3j6ERSVGXUPj8ADA=="
+                length="1570304"
+                type="application/octet-stream"/>
+        </item>
     </channel>
 </rss>
